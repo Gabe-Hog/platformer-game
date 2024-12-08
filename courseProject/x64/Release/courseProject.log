@@ -1,0 +1,6 @@
+﻿  main.cpp
+  Generating code
+  Compiler switch has changed, fall back to full compilation.
+  All 4 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  courseProject.vcxproj -> C:\Users\gabri\source\repos\courseProject\x64\Release\courseProject.exe
