@@ -132,7 +132,7 @@
                 <mxCell id="S4nnt21ixPrk0VT9_j-a-8" value="+checkCollision():bool" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="8" vertex="1">
                     <mxGeometry y="70" width="160" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="12" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;fontSize=12;" parent="1" edge="1">
+                <mxCell id="12" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;fontSize=12;entryX=0.428;entryY=1.019;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" target="56" edge="1">
                     <mxGeometry width="160" relative="1" as="geometry">
                         <mxPoint x="480" y="280" as="sourcePoint"/>
                         <mxPoint x="480" y="220" as="targetPoint"/>
