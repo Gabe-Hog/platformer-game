@@ -10,7 +10,9 @@
 # Precompiled Headers
 *.gch
 *.pch
-
+# Ignore precompiled header files
+ *.ipch
+vs/**/ipch/**
 # Fortran module files
 *.mod
 *.smod
@@ -30,3 +32,8 @@
 
 # Build
 Build
+
+#
+.vs/**/*.suo 
+.vs/**/*.db 
+.vs/**/*.json
