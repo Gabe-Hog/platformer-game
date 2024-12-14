@@ -1,25 +1,11 @@
-﻿  Character.cpp
-  Game.cpp
-C:\Users\gabri\source\repos\platformer-game\courseProject\Character.h(23,2): error C2144: syntax error: 'void' should be preceded by ';'
-  (compiling source file 'Character.cpp')
+﻿  Game.cpp
+C:\Users\gabri\source\repos\platformer-game\courseProject\Projectile.h(5,42): warning C4584: 'Projectile': base-class 'sf::Drawable' is already a base-class of 'GameObjects'
+  (compiling source file 'Game.cpp')
+      C:\Users\gabri\source\repos\platformer-game\include\SFML\Graphics\Drawable.hpp(44,25):
+      see declaration of 'sf::Drawable'
+      C:\Users\gabri\source\repos\platformer-game\courseProject\GameObjects.h(5,7):
+      see declaration of 'GameObjects'
   
-C:\Users\gabri\source\repos\platformer-game\courseProject\Character.cpp(3,12): error C2511: 'Character::Character(Weapon &)': overloaded member function not found in 'Character'
-      C:\Users\gabri\source\repos\platformer-game\courseProject\Character.h(10,7):
-      see declaration of 'Character'
-  
-C:\Users\gabri\source\repos\platformer-game\courseProject\Character.cpp(4,1): error C2550: 'Character::{ctor}': constructor initializer lists are only allowed on constructor definitions
-  GameObjects.cpp
-  main.cpp
-  Monster.cpp
-  Player.cpp
-C:\Users\gabri\source\repos\platformer-game\courseProject\Character.h(23,2): error C2144: syntax error: 'void' should be preceded by ';'
-  (compiling source file 'Player.cpp')
-  
-  Projectile.cpp
-C:\Users\gabri\source\repos\platformer-game\courseProject\Projectile.cpp(4,1): error C2512: 'Weapon': no appropriate default constructor available
-      C:\Users\gabri\source\repos\platformer-game\courseProject\Weapon.h(4,7):
-      see declaration of 'Weapon'
-  
-  Timer.cpp
-  Weapon.cpp
-  Generating Code...
+C:\Users\gabri\source\repos\platformer-game\courseProject\Game.cpp(26,21): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\gabri\source\repos\platformer-game\courseProject\Game.cpp(26,14): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  courseProject.vcxproj -> C:\Users\gabri\source\repos\platformer-game\x64\Debug\courseProject.exe

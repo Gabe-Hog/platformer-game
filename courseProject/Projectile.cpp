@@ -10,6 +10,7 @@ void Projectile::attack()
 
 bool Projectile::checkCollision()
 {
+    return false;
 }
 
 bool Projectile::hit()

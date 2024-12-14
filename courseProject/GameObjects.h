@@ -10,7 +10,9 @@ private:
 public:
 
 	virtual bool checkCollision() = 0;
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
+
+
 
 
 };

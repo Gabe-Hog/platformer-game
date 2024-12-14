@@ -1,5 +1,5 @@
 #include "Game.h"
-
+#include "Platform.h"
 void Game::eventHandle()
 {
 	sf::Event e;
@@ -12,13 +12,18 @@ void Game::eventHandle()
 
 void Game::update()
 {
+	
 }
 
 void Game::render()
 {
+	this->window.clear();
+	this->window.draw(this->platform);
+	this->window.display();
 }
 
-Game::Game() : window(sf::VideoMode(800, 800), "test")
+Game::Game() : window(sf::VideoMode(WIDTH, HEIGHT), "test"),
+				platform(WIDTH, HEIGHT, sf::Color::Green, 80.f, 20.f)
 {
 }
 
@@ -31,6 +36,7 @@ void Game::run()
 	while (this->window.isOpen())
 	{
 		eventHandle();
+		render();
 
 	}
 }
