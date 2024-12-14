@@ -1,8 +1,17 @@
 
-#include "SFML/Graphics.hpp"
+//#include "SFML/Graphics.hpp"
+#include "Game.h"
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(800, 800), "test");
+	Game game;
+
+	game.run();
+	
+	
+
+
+
+	/*sf::RenderWindow window(sf::VideoMode(800, 800), "test");
 	sf::Event e;
 	while (window.isOpen())
 	{
@@ -11,7 +20,7 @@ int main()
 			if (e.type == sf::Event::Closed)
 				window.close();
 		}
-	}
+	}*/
 
 	return 0;
 }
