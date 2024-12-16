@@ -1,11 +1,4 @@
-﻿  Game.cpp
-C:\Users\gabri\source\repos\platformer-game\courseProject\Projectile.h(5,42): warning C4584: 'Projectile': base-class 'sf::Drawable' is already a base-class of 'GameObjects'
-  (compiling source file 'Game.cpp')
-      C:\Users\gabri\Source\Repos\platformer-game\include\SFML\Graphics\Drawable.hpp(44,25):
-      see declaration of 'sf::Drawable'
-      C:\Users\gabri\source\repos\platformer-game\courseProject\GameObjects.h(5,7):
-      see declaration of 'GameObjects'
-  
-C:\Users\gabri\source\repos\platformer-game\courseProject\Game.cpp(26,21): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\gabri\source\repos\platformer-game\courseProject\Game.cpp(26,14): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  courseProject.vcxproj -> C:\Users\gabri\Source\Repos\platformer-game\x64\Debug\courseProject.exe
+﻿  Monster.cpp
+C:\Users\gabri\source\repos\platformer-game\courseProject\Monster.cpp(37,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\gabri\source\repos\platformer-game\courseProject\Monster.cpp(38,27): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  courseProject.vcxproj -> C:\Users\gabri\source\repos\platformer-game\x64\Debug\courseProject.exe

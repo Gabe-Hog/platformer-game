@@ -7,16 +7,17 @@
 #include "Player.h"
 #include "Monster.h"
 #include "Platform.h"
+#include <vector>
 
 using namespace std;
-static int WIDTH = 900;
-static int HEIGHT = 600;
+static float WIDTH = 900;
+static float HEIGHT = 600;
 class Game
 {
 private:
 	sf::RenderWindow window;
-	Platform platform;
-
+	
+	vector<GameObjects*> objects;
 	void eventHandle();
 	void update();
 	void render();
@@ -27,7 +28,7 @@ public:
 	Game();
 	~Game();
 	void run();
-	bool addObject();
+	bool addObject(GameObjects* aObject);
 	
 
 

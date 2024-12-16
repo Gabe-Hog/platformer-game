@@ -7,15 +7,20 @@ class Player : public Character
 {
 private:
 	 int unsigned score = 0;
-	 Sword* sword;
+	 sf::RectangleShape player;
+	 sf::Vector2f position; 
 
 
 public:
+
 	Player();
-	void move() override;
+	~Player();
+
 	int getScore() const;
 	void updateScore();
-
+	void updatePosition() override;
+	bool checkCollision() override;
+	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 
 

@@ -5,6 +5,7 @@
 #include "GameObjects.h"
 #include "Weapon.h"
 
+
 using namespace std;
 
 class Character:public GameObjects
@@ -13,14 +14,16 @@ private:
 	int health;
 	string name;
 	Weapon* wep;
+	float moveSpeed;
 
 
 public:
-	Character(Weapon* weapon);
+	Character() = default;
+	Character(Weapon* weapon, int newHealth, string newName, float newMoveSpeed);
 	~Character();
 
-
-	virtual void move() = 0;
+	float getMoveSpeed() const;
+	virtual void updatePosition() = 0;
 	void calcHealth();
 
 

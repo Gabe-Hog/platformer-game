@@ -2,22 +2,28 @@
 #define MONSTER_H
 #include "Character.h"
 #include "Projectile.h"
-class Monster : Character
+
+class Monster : public Character
 {
 private:
-
-	float moveSpeed = 3.0f;
+	
+	
 	float attackSpeed = 2.0f;
+	sf::RectangleShape monster;
+	sf::Vector2f position;
 
 public:
 
 	Monster();
 	~Monster();
 
-	bool checkCollision() override;
 	void setDífficulty();
 	Monster* respawn(); 
-	void move() override;
+
+	void updatePosition() override;
+	bool checkCollision() override;
+	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+	
 
 
 

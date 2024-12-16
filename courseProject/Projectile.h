@@ -2,7 +2,7 @@
 #define PROJECTILE_H
 #include "GameObjects.h"
 #include "Weapon.h"
-class Projectile : public Weapon, public GameObjects, public sf::Drawable
+class Projectile : public Weapon, public GameObjects
 {
 private:
 
@@ -16,7 +16,7 @@ public:
 	void attack() override;
 	bool checkCollision() override;
 	bool hit();
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 
 
