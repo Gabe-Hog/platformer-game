@@ -2,6 +2,7 @@
 #define MONSTER_H
 #include "Character.h"
 #include "Projectile.h"
+#include "GameObjects.h"
 
 class Monster : public Character
 {
@@ -20,8 +21,8 @@ public:
 	void setDífficulty();
 	Monster* respawn(); 
 
-	void updatePosition() override;
-	bool checkCollision() override;
+	void updatePosition(float dTime) override;
+	bool checkCollision(GameObjects& object1) override;
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 	
 

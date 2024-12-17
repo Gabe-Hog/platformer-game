@@ -4,11 +4,15 @@
 class Timer
 {
 private:
-		sf::Clock clock;
-		sf::Time timer;
-
+		sf::Clock* clock = new(sf::Clock);
+		float dTime;
+		
 public:
-	float getTime();
+	Timer() = default;
+	~Timer();
+	float getDeltaTime() const;
+	void setDeltaTime();
+	sf::Clock* getClock() const;
 };
 
 #endif

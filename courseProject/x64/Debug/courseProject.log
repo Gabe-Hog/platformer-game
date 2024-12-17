@@ -1,4 +1,2 @@
-﻿  Monster.cpp
-C:\Users\gabri\source\repos\platformer-game\courseProject\Monster.cpp(37,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\gabri\source\repos\platformer-game\courseProject\Monster.cpp(38,27): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-  courseProject.vcxproj -> C:\Users\gabri\source\repos\platformer-game\x64\Debug\courseProject.exe
+﻿  Platform.cpp
+  courseProject.vcxproj -> C:\Users\gabri\Source\Repos\platformer-game\x64\Debug\courseProject.exe

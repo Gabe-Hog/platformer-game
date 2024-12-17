@@ -2,14 +2,15 @@
 #define GAMEOBJECTS_H
 
 #include "SFML/Graphics.hpp"
+
 class GameObjects : public sf::Drawable
 {
 private:
 
 
 public:
-
-	virtual bool checkCollision() = 0;
+	virtual ~GameObjects();
+	virtual bool checkCollision(GameObjects& object1) = 0;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
 
 

@@ -1,10 +1,11 @@
 #include "Platform.h"
-
-Platform::Platform(float windowWidth, float windowHeight, sf::Color colour, float width, float height) 
-	: width(width), height(height), rect(sf::Vector2f(width, height))
+#include "Player.h"
+#include <iostream>
+Platform::Platform(sf::Vector2f pos, sf::Color colour, float width, float height) 
+	: pos(pos), width(width), height(height), rect(sf::Vector2f(width, height))
 {
 	this->rect.setFillColor(colour);
-	this->rect.setPosition(windowWidth/1.9f, windowHeight/2.1f);
+	this->rect.setPosition(pos);
 	
 }
 
@@ -12,12 +13,47 @@ Platform::~Platform()
 {
 }
 
-bool Platform::checkCollision()
+bool Platform::checkCollision(GameObjects & object)
 {
-	return false;
+	bool didCollide = false;
+	if(Player* player = dynamic_cast<Player*>(&object))
+	{ 
+		sf::FloatRect playerBounds = player->getBounds(); 
+		sf::FloatRect platformBounds = this->rect.getGlobalBounds();
+		
+		if (platformBounds.intersects(playerBounds))
+		{
+			if (playerBounds.top + playerBounds.height >= platformBounds.top &&  player->getVelocity().y > 0)
+			{
+				player->setVelocity({ 0,0 });
+				player->getPlayer()->setPosition(player->getPlayer()->getPosition().x, platformBounds.top - playerBounds.height);
+				
+				
+				
+				player->setJumping(false);
+				
+				didCollide = true;
+				
+			}
+
+
+			
+		
+		}
+		
+
+
+
+
+	}
+
+
+	return didCollide;
 }
 
 void Platform::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(this->rect);
 }
+
+

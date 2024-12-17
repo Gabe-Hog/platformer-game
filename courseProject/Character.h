@@ -15,15 +15,16 @@ private:
 	string name;
 	Weapon* wep;
 	float moveSpeed;
-
+	sf::FloatRect bounds;
 
 public:
 	Character() = default;
 	Character(Weapon* weapon, int newHealth, string newName, float newMoveSpeed);
 	~Character();
-
+	void setBounds(const sf::Shape& shape); 
+	sf::FloatRect getBounds();
 	float getMoveSpeed() const;
-	virtual void updatePosition() = 0;
+	virtual void updatePosition(float dTime) = 0;
 	void calcHealth();
 
 

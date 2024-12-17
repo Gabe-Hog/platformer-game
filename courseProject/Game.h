@@ -8,7 +8,7 @@
 #include "Monster.h"
 #include "Platform.h"
 #include <vector>
-
+#include "Timer.h"
 using namespace std;
 static float WIDTH = 900;
 static float HEIGHT = 600;
@@ -16,10 +16,10 @@ class Game
 {
 private:
 	sf::RenderWindow window;
-	
+	Timer clock;
 	vector<GameObjects*> objects;
 	void eventHandle();
-	void update();
+	void update(float dTime);
 	void render();
 
 

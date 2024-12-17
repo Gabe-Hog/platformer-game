@@ -6,7 +6,20 @@ Character::Character(Weapon* weapon, int newHealth, string newName, float newMov
 
 Character::~Character()
 {
+	delete this->wep;
 }
+
+void Character::setBounds(const sf::Shape& shape)
+{
+	this->bounds = shape.getGlobalBounds();
+}
+
+sf::FloatRect Character::getBounds()
+{
+	return this->bounds;
+}
+
+
 
 float Character::getMoveSpeed() const
 {

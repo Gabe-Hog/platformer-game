@@ -1,6 +1,8 @@
 #include "Game.h"
 #include "Platform.h"
 #include "Character.h"
+#include "Timer.h"
+#include <iostream>
 
 void Game::eventHandle()
 {
@@ -12,16 +14,32 @@ void Game::eventHandle()
 	}
 }
 
-void Game::update()
+void Game::update(float dTime)
 {
+
+	
 	for (size_t i = 0; i < objects.size(); i++)
 	{
 		Character* pCharacter = dynamic_cast<Character*>(this->objects[i]);
 		if (pCharacter != nullptr)
 		{
-			pCharacter->updatePosition();
+			pCharacter->updatePosition(dTime);
 		}
 	}
+	
+	for (size_t i = 0; i < objects.size(); i++)
+	{
+		for (size_t j = 0; j < objects.size(); j++)
+		{
+			if(this->objects[i] != this->objects[j])
+
+				this->objects[i]->checkCollision(*this->objects[j]);
+		}
+		
+	}
+
+
+
 	
 }
 
@@ -36,28 +54,40 @@ void Game::render()
 	this->window.display();
 }
 
-Game::Game() : window(sf::VideoMode(WIDTH, HEIGHT), "test")
-				
+Game::Game() : window(sf::VideoMode(WIDTH, HEIGHT), "test")		
 {  
-	this->addObject(new Platform(WIDTH, HEIGHT, sf::Color::Green, 80.f, 20.f));
-	this->addObject(new Platform(WIDTH-200, HEIGHT-100, sf::Color::Yellow, 100.f, 30.f));
-	this->addObject(new Platform(WIDTH-50, HEIGHT+100, sf::Color::Blue, 200.f, 20.f));
+	window.setFramerateLimit(60);
+	this->addObject(new Platform(sf::Vector2f(100,500), sf::Color::Green, 200.f, 20.f));
+	this->addObject(new Platform(sf::Vector2f(400, 400),  sf::Color::Yellow, 100.f, 20.f));
+	this->addObject(new Platform(sf::Vector2f(150, 250),  sf::Color::Yellow, 150.f, 20.f));
+	this->addObject(new Platform(sf::Vector2f(450, 170), sf::Color::Blue, 70.f, 20.f));
 	this->addObject(new Player());
 	this->addObject(new Monster());
 }
 
 Game::~Game()
 {
+	for (size_t i = 0; i < this->objects.size(); i++)
+	{
+		delete this->objects[i];
+	}
 }
 
 void Game::run()
 {
+
 	while (this->window.isOpen())
 	{
-		eventHandle();
-		update();
-		render();
+		this->clock.setDeltaTime();
+		float dTime = this->clock.getDeltaTime();
 
+
+		eventHandle();
+		update(dTime);
+		render();
+		
+		
+		
 	}
 }
 

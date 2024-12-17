@@ -8,7 +8,7 @@ void Projectile::attack()
 {
 }
 
-bool Projectile::checkCollision()
+bool Projectile::checkCollision(GameObjects & object1)
 {
     return false;
 }

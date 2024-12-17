@@ -14,7 +14,7 @@ public:
 	Projectile(float speed);
 
 	void attack() override;
-	bool checkCollision() override;
+	bool checkCollision(GameObjects& object1) override;
 	bool hit();
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
