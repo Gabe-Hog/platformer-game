@@ -10,8 +10,9 @@ private:
 	
 	
 	float attackSpeed = 2.0f;
+	sf::Vector2f randomPosition{ 800,500 };
 	sf::RectangleShape monster;
-	sf::Vector2f position;
+	
 
 public:
 

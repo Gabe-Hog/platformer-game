@@ -3,7 +3,7 @@
 #include <math.h>
 #include <iostream>
 Player::Player() : 
-	Character(new Sword(), 5, "Bob", 50.f), position(0, 550), player(sf::Vector2f(50,50))
+	Character(new Sword(), 5, "Bob", 200.f), position(0, 550), player(sf::Vector2f(50,50))
 {
 	
 	player.setFillColor(sf::Color::Red);
@@ -36,7 +36,7 @@ void Player::updatePosition(float dTime)
 	}
 
 	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !isJumping)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && !isJumping)
 	{
 		this->isJumping = true;
 		velocity.y = -sqrtf(2.0f * 981.f * this->jumpHeight);
