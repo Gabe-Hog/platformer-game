@@ -21,13 +21,16 @@ public:
 	Monster() = default;
 	Monster(Player* player);
 	~Monster();
-	void setDífficulty();
+	
 
-	void processDeath() override;
+	void checkForDeath() override;
 
 	void updatePosition(float dTime) override;
+	void updateDifficulty();
 	bool checkCollision(GameObjects& object1) override;
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+	
+	void setAttackSpeed(float newAttackSpeed);
 	
 
 

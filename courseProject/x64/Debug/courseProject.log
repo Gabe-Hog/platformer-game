@@ -1,2 +1,5 @@
-﻿  Projectile.cpp
+﻿  Player.cpp
+  Projectile.cpp
+  Weapon.cpp
+  Generating Code...
   courseProject.vcxproj -> C:\Users\gabri\source\repos\courseProject\x64\Debug\courseProject.exe

@@ -5,7 +5,10 @@
 class Sword : public Weapon
 {
 private:
-	float range = 5.0f;
+	float swingSpeed= 6.0f;
+	bool isSwinging = false;
+	sf::RectangleShape sword;
+
 
 public:
 	Sword();

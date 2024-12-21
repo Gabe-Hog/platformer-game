@@ -25,3 +25,15 @@ void Weapon::dealDamage(Character& character) const
 {
 	character.takeDamage(this->damage);
 }
+
+void Weapon::setDidHit(bool hit)
+{
+	this->didHit = hit;
+}
+
+
+bool Weapon::hit() const
+{
+	return this->didHit;
+}
+

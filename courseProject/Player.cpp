@@ -3,11 +3,12 @@
 #include <math.h>
 #include <iostream>
 Player::Player() : 
-	Character(new Sword(), 5, "Bob", 200.f), position(0, 550), player(sf::Vector2f(50,50))
+	Character(new Sword(), 5, "Bob", 200.f), position(25, 525), player(sf::Vector2f(50, 50))
 {
 	
 	player.setFillColor(sf::Color::Red);
 	player.setPosition(position);
+	player.setOrigin(player.getSize().x/2, player.getSize().y/2);
 	this->setBounds(player);
 }
 
@@ -19,6 +20,7 @@ Player::~Player()
 void Player::updatePosition(float dTime)
 {
 	this->setBounds(this->player);
+	this->getWeapon()->setOwnerPosition(player.getPosition());
 	sf::FloatRect playerArea = this->getBounds();
 	this->velocity.x = 0.f;
 
@@ -35,6 +37,11 @@ void Player::updatePosition(float dTime)
 
 	}
 
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
+		this->getWeapon()->attack();
+	}
+
 	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && !isJumping)
 	{
@@ -45,6 +52,7 @@ void Player::updatePosition(float dTime)
 	}
 	
 
+	this->getWeapon()->updatePosition(dTime);
 	this->velocity.y += 981.f * dTime;
 	this->player.move(velocity * dTime);
 	
@@ -57,30 +65,30 @@ bool Player::checkCollision(GameObjects& object1)
 	bool collisionMonster = false;
 	sf::FloatRect playerbounds = this->getBounds();
 
-	if (player.getPosition().x  < 0.f)
+	if (player.getPosition().x - playerbounds.width/2 < 0.f)
 	{
-		player.setPosition(0.f, player.getPosition().y);
+		player.setPosition(player.getOrigin().x, player.getPosition().y);
 	}
 
-	if (player.getPosition().x + playerbounds.width > WIDTH)
+	if (player.getPosition().x + playerbounds.width/2 > WIDTH)
 	{
-		player.setPosition(WIDTH - playerbounds.width, player.getPosition().y);
+		player.setPosition(WIDTH - playerbounds.width/2, player.getPosition().y);
 	}
 
-	if (player.getPosition().y + playerbounds.height > HEIGHT)
+	if (player.getPosition().y + playerbounds.height/2 > HEIGHT)
 	{
 		this->isJumping = false;
-		player.setPosition(player.getPosition().x, HEIGHT - playerbounds.height);
+		player.setPosition(player.getPosition().x, HEIGHT - playerbounds.height/2);
 	}
 
-	if (player.getPosition().y < 0.f)
+	if (player.getPosition().y/2 < 0.f)
 	{
 		
 		player.setPosition(player.getPosition().x, 0.f);
 		
 	}
 
-	
+	this->getWeapon()->checkCollision(object1);
 
 
 
@@ -101,6 +109,7 @@ void Player::setVelocity(sf::Vector2f newVel)
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(this->player);
+	this->getWeapon()->callDraw(target, states);
 }
 
 int Player::getScore() const
@@ -128,7 +137,8 @@ sf::Vector2f Player::getPlayerPosition()
 	return this->player.getPosition();
 }
 
-void Player::processDeath()
+void Player::checkForDeath()
 {
-	bool dead = false;
 }
+
+

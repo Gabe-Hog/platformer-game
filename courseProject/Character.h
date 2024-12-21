@@ -27,12 +27,14 @@ public:
 	
 
 	float getMoveSpeed() const;
-	virtual void processDeath() = 0;
+	virtual void checkForDeath() = 0;
 	virtual void updatePosition(float dTime) = 0;
 	Weapon* getWeapon() const;
 	void takeDamage(int damage);
-	void calcHealth();
-
+	int getHealth() const;
+	
+	void setHealth(int newHealth);
+	void setMoveSpeed(float newMoveSpeed);
 
 };
 #endif

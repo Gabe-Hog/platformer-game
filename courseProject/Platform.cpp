@@ -23,10 +23,10 @@ bool Platform::checkCollision(GameObjects & object)
 		
 		if (platformBounds.intersects(playerBounds))
 		{
-			if (playerBounds.top + playerBounds.height >= platformBounds.top && player->getVelocity().y > 0)
+			if (playerBounds.top + playerBounds.height > platformBounds.top - playerBounds.height && player->getVelocity().y > 0)
 			{
 				player->setVelocity({ 0,0 });
-				player->getPlayer()->setPosition(player->getPlayer()->getPosition().x, platformBounds.top - playerBounds.height);
+				player->getPlayer()->setPosition(player->getPlayer()->getPosition().x, platformBounds.top - playerBounds.height/2);
 				player->setJumping(false);
 
 				didCollide = true;

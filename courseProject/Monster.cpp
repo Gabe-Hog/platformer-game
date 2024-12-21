@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Game.h"
 #include <math.h>
+#include <utility>
 //Monster::Monster(): Character(new Projectile(2), 40, "Ross", 200.f), monster(sf::Vector2f(100, 100))
 //{
 //    
@@ -65,12 +66,18 @@ bool Monster::checkCollision(GameObjects& object1)
     return false;
 }
 
-void Monster::setDífficulty()
-{
-}
 
-void Monster::processDeath()
+void Monster::checkForDeath()
 {
+    if (this->getHealth() <= 0)
+    {
+        this->monster.setPosition(800, 500);
+        this->updateDifficulty();
+
+
+    }
+
+
 
 }
 
@@ -83,8 +90,14 @@ void Monster::draw(sf::RenderTarget& target, sf::RenderStates states) const
     
 }
 
+void Monster::setAttackSpeed(float newAttackSpeed)
+{
+    this->attackSpeed = newAttackSpeed;
+}
+
 void Monster::updatePosition(float dTime)
 {
+    this->checkForDeath();
     this->setBounds(monster);
     this->getWeapon()->setOwnerPosition(monster.getPosition());
     sf::FloatRect monsterArea = this->getBounds();
@@ -108,6 +121,7 @@ void Monster::updatePosition(float dTime)
         point.setPosition(randomPosition);
     }
     
+
     this->setDirection(randomPosition - (monster.getPosition()));
   
     
@@ -118,5 +132,15 @@ void Monster::updatePosition(float dTime)
        
   
 
+}
+
+void Monster::updateDifficulty()
+{
+    static int Health = 50;
+    float moveSpeed = this->getMoveSpeed();
+    this->setHealth(Health);
+    this->setMoveSpeed(moveSpeed+30);
+    this->setAttackSpeed(this->attackSpeed - 0.4);
+    Health += 20;
 }
 

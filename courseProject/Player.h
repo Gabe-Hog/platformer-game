@@ -12,7 +12,7 @@ private:
 	 sf::RectangleShape player;
 	 sf::Vector2f position; 
 	 sf::Vector2f velocity;
-	 float jumpHeight = 200.f;
+	 float jumpHeight = 150.f;
 	 bool isJumping = false;
 
 
@@ -26,9 +26,8 @@ public:
 	sf::Vector2f getVelocity() const;
 	void updateScore();
 	sf::Vector2f getPlayerPosition();
-	void processDeath() override;
+	void checkForDeath() override;
 	void updatePosition(float dTime) override;
-
 	bool checkCollision(GameObjects & object1) override;
 	void setJumping(bool state);
 	void setVelocity(sf::Vector2f newVel);

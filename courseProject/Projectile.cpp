@@ -2,8 +2,8 @@
 #include "Character.h"
 #include "Platform.h"
 #include "Game.h"
+#include <algorithm>
 
-#include "iostream"
 Projectile::Projectile(float speed, int damage) : Weapon(damage), speed(speed)
 {
     
@@ -18,18 +18,12 @@ Projectile::Projectile(float speed, sf::Vector2f ownerPosition, sf::Vector2f tar
     this->shape.setPosition(ownerPosition);
 }
 
-Projectile::~Projectile()
-{
-    for (auto& projectile : this->projectiles)
-    {
-        delete projectile;
-    }
-}
+
 
 void Projectile::attack(sf::Vector2f targetDirection)
 {
     sf::Vector2f test = this->getOwnerPosition();
-    this->projectiles.push_back(new Projectile(this->speed, this->getOwnerPosition(), targetDirection));
+    this->projectiles.push_back(make_shared<Projectile>(this->speed, this->getOwnerPosition(), targetDirection));
     
     for (auto& projectile : this->projectiles)
     {
@@ -52,8 +46,13 @@ void Projectile::updatePosition(float dTime)
     {
         projectile->shape.move(projectile->getNormalizedDirection() * projectile->speed * dTime);
         projectile->isMoving = true;
-      
+     
+       
     }
+    projectiles.erase(remove_if(projectiles.begin(), projectiles.end(),
+        [](const shared_ptr<Projectile>& projec) {return projec->outOfBounds() || projec->hit();
+        }),
+    projectiles.end());
 
   
 }
@@ -71,22 +70,25 @@ bool Projectile::checkCollision(GameObjects& object1)
             if (character->getBounds().contains(projectile->shape.getPosition()))
             {
                 didCollide = true;
-                cout << "did Collide" << endl;
-                delete projectile;
+                
+                
                 this->dealDamage(*character);
+                projectile->setDidHit(true);
             }
         }
         else if (Platform* platform = dynamic_cast<Platform*>(&object1))
         {
             sf::FloatRect platformBounds = platform->getBounds();
-            if (platformBounds.intersects(projectile->getBounds()))
+            if (platformBounds.contains(projectile->shape.getPosition()))
             {
-                cout << "Collided Platform" << endl;
-                delete projectile;
+                
+                projectile->setDidHit(true);
                 didCollide = true;
             }
 
         }
+
+        
     }
 
     return didCollide;
@@ -100,11 +102,12 @@ void Projectile::callDraw(sf::RenderTarget& target, sf::RenderStates states)
     }
 }
 
-
-bool Projectile::hit()
+void Projectile::removeProjectile()
 {
-    return false;
+
+
 }
+
 
 void Projectile::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
@@ -114,19 +117,19 @@ void Projectile::draw(sf::RenderTarget& target, sf::RenderStates states) const
 bool Projectile::outOfBounds() const
 {
     bool outOfBounds = false;
-    sf::Vector2f position;
+    sf::Vector2f position = this->shape.getPosition();
    
-     position = shape.getPosition();
+     
         if (position.y < 0.f || position.y > HEIGHT || position.x < 0.f || position.x > WIDTH)
         {
-            delete this;
             outOfBounds = true;
+
         }
     
     return outOfBounds;
 }
 
-vector<Projectile*> Projectile::getProjectiles() const
+vector<shared_ptr<Projectile>> Projectile::getProjectiles() const
 {
     return this->projectiles;
 }

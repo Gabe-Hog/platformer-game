@@ -1,7 +1,10 @@
 #include "Character.h"
 #include "Weapon.h"
-Character::Character(Weapon* weapon, int newHealth, string newName, float newMoveSpeed) : wep(weapon), health(newHealth), moveSpeed(newMoveSpeed)
+#include <iostream>
+Character::Character(Weapon* weapon, int newHealth, string newName, float newMoveSpeed) :
+	wep(weapon), health(newHealth), moveSpeed(newMoveSpeed)
 {
+
 }
 
 Character::~Character()
@@ -31,8 +34,20 @@ Weapon* Character::getWeapon() const
 void Character::takeDamage(int damage)
 {
 	this->health -= damage;
+	cout << this->health << endl;
 }
 
-void Character::calcHealth()
+int Character::getHealth() const
 {
+	return this->health;
+}
+
+void Character::setHealth(int newHealth)
+{
+	this->health = newHealth;
+}
+
+void Character::setMoveSpeed(float newMoveSpeed)
+{
+	this->moveSpeed = newMoveSpeed;
 }
