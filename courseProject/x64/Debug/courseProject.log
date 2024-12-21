@@ -1,13 +1,2 @@
-﻿  Monster.cpp
-C:\Users\gabri\source\repos\platformer-game\courseProject\Monster.cpp(75,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\gabri\source\repos\platformer-game\courseProject\Monster.cpp(78,34): warning C4244: '=': conversion from 'int' to 'T', possible loss of data
-C:\Users\gabri\source\repos\platformer-game\courseProject\Monster.cpp(78,34): warning C4244:         with
-C:\Users\gabri\source\repos\platformer-game\courseProject\Monster.cpp(78,34): warning C4244:         [
-C:\Users\gabri\source\repos\platformer-game\courseProject\Monster.cpp(78,34): warning C4244:             T=float
-C:\Users\gabri\source\repos\platformer-game\courseProject\Monster.cpp(78,34): warning C4244:         ]
-C:\Users\gabri\source\repos\platformer-game\courseProject\Monster.cpp(79,34): warning C4244: '=': conversion from 'int' to 'T', possible loss of data
-C:\Users\gabri\source\repos\platformer-game\courseProject\Monster.cpp(79,34): warning C4244:         with
-C:\Users\gabri\source\repos\platformer-game\courseProject\Monster.cpp(79,34): warning C4244:         [
-C:\Users\gabri\source\repos\platformer-game\courseProject\Monster.cpp(79,34): warning C4244:             T=float
-C:\Users\gabri\source\repos\platformer-game\courseProject\Monster.cpp(79,34): warning C4244:         ]
-  courseProject.vcxproj -> C:\Users\gabri\Source\Repos\platformer-game\x64\Debug\courseProject.exe
+﻿  Projectile.cpp
+  courseProject.vcxproj -> C:\Users\gabri\source\repos\courseProject\x64\Debug\courseProject.exe

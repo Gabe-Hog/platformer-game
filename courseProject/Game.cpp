@@ -57,12 +57,13 @@ void Game::render()
 Game::Game() : window(sf::VideoMode(WIDTH, HEIGHT), "test")		
 {  
 	window.setFramerateLimit(60);
+	Player* yourPlayer = new Player();
 	this->addObject(new Platform(sf::Vector2f(100,500), sf::Color::Green, 200.f, 20.f));
 	this->addObject(new Platform(sf::Vector2f(400, 400),  sf::Color::Yellow, 100.f, 20.f));
 	this->addObject(new Platform(sf::Vector2f(150, 250),  sf::Color::Yellow, 150.f, 20.f));
 	this->addObject(new Platform(sf::Vector2f(450, 170), sf::Color::Blue, 70.f, 20.f));
-	this->addObject(new Player());
-	this->addObject(new Monster());
+	this->addObject(yourPlayer);
+	this->addObject(new Monster(yourPlayer));
 }
 
 Game::~Game()

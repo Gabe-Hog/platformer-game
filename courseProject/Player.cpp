@@ -122,3 +122,13 @@ void Player::updateScore()
 {
 	this->score++;
 }
+
+sf::Vector2f Player::getPlayerPosition()
+{
+	return this->player.getPosition();
+}
+
+void Player::processDeath()
+{
+	bool dead = false;
+}

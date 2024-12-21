@@ -1,6 +1,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
-#include "GameObjects.h"
+
 #include "Character.h"
 #include "Sword.h"
 
@@ -25,7 +25,10 @@ public:
 	sf::Shape* getPlayer();
 	sf::Vector2f getVelocity() const;
 	void updateScore();
+	sf::Vector2f getPlayerPosition();
+	void processDeath() override;
 	void updatePosition(float dTime) override;
+
 	bool checkCollision(GameObjects & object1) override;
 	void setJumping(bool state);
 	void setVelocity(sf::Vector2f newVel);

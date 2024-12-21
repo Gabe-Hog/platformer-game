@@ -6,7 +6,7 @@ Platform::Platform(sf::Vector2f pos, sf::Color colour, float width, float height
 {
 	this->rect.setFillColor(colour);
 	this->rect.setPosition(pos);
-	
+	this->setBounds(rect);
 }
 
 Platform::~Platform()
@@ -19,32 +19,20 @@ bool Platform::checkCollision(GameObjects & object)
 	if(Player* player = dynamic_cast<Player*>(&object))
 	{ 
 		sf::FloatRect playerBounds = player->getBounds(); 
-		sf::FloatRect platformBounds = this->rect.getGlobalBounds();
+		sf::FloatRect platformBounds = this->getBounds();
 		
 		if (platformBounds.intersects(playerBounds))
 		{
-			if (playerBounds.top + playerBounds.height >= platformBounds.top &&  player->getVelocity().y > 0)
+			if (playerBounds.top + playerBounds.height >= platformBounds.top && player->getVelocity().y > 0)
 			{
 				player->setVelocity({ 0,0 });
 				player->getPlayer()->setPosition(player->getPlayer()->getPosition().x, platformBounds.top - playerBounds.height);
-				
-				
-				
 				player->setJumping(false);
-				
+
 				didCollide = true;
-				
+
 			}
-
-
-			
-		
 		}
-		
-
-
-
-
 	}
 
 

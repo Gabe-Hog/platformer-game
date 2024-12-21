@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\gabri\Source\Repos\platformer-game\x64\Debug\courseProject.exe</FullPath>
+      <FullPath>C:\Users\gabri\source\repos\courseProject\x64\Debug\courseProject.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
