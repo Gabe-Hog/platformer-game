@@ -12,7 +12,7 @@ private:
 
 public:
 	Sword();
-	~Sword();
+	~Sword() = default;
 	void attack(sf::Vector2f targetDirection) override;
 	void updatePosition(float dTime) override;
 	bool checkCollision(GameObjects& object1) override;

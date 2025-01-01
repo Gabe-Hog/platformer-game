@@ -16,19 +16,27 @@ class Game
 {
 private:
 	sf::RenderWindow window;
-	Timer clock;
+	Timer timer;
 	vector<GameObjects*> objects;
+	bool roundEnded = false;
 	void eventHandle();
 	void update(float dTime);
 	void render();
 
 
 public:
-
+	void initGameObjects();
+	
 	Game();
 	~Game();
 	void run();
 	bool addObject(GameObjects* aObject);
+	void updateObjectPosition(float dTime);
+	void makeCollisionCheck();
+	static void updatePlayersScore(const Player& player);
+	void endRound(const Player&);
+	void writeScoreToFile(string score);
+	void startMainMenu();
 	
 
 

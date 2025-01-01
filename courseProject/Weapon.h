@@ -17,11 +17,10 @@ private:
 	sf::Vector2f ownerPosition;
 
 public:
+
 	Weapon() = default;
 	Weapon(int damage);
-
-
-	virtual ~Weapon();
+	virtual ~Weapon() = default;
 	virtual void callDraw(sf::RenderTarget& target, sf::RenderStates states) = 0;
 	virtual void attack(sf::Vector2f targetDirection = {0.f,0.f}) = 0;
 	virtual void updatePosition(float dTime) = 0;

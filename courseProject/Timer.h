@@ -6,11 +6,14 @@ class Timer
 private:
 		sf::Clock* clock = new(sf::Clock);
 		float dTime;
+		float elapsedTime = 0.f;
 		
 public:
 	Timer() = default;
 	~Timer();
+	void addToElapsedTime(float elapsedTime);
 	float getDeltaTime() const;
+	float getTimerElapsedTime() const;
 	void setDeltaTime();
 	sf::Clock* getClock() const;
 };

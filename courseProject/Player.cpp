@@ -2,13 +2,21 @@
 #include "Game.h"
 #include <math.h>
 #include <iostream>
-Player::Player() : 
+Player::Player() :
 	Character(new Sword(), 5, "Bob", 200.f), position(25, 525), player(sf::Vector2f(50, 50))
 {
 	
 	player.setFillColor(sf::Color::Red);
 	player.setPosition(position);
 	player.setOrigin(player.getSize().x/2, player.getSize().y/2);
+	this->setBounds(player);
+}
+
+Player::Player(void(Game::*deathCallBack)(const Player&), Game* gameInstance) : Character(new Sword(), 1, "Bob", 200.f, gameInstance), deathCallBack(deathCallBack), position(25, 525), player(sf::Vector2f(50, 50))
+{
+	player.setFillColor(sf::Color::Red);
+	player.setPosition(position);
+	player.setOrigin(player.getSize().x / 2, player.getSize().y / 2);
 	this->setBounds(player);
 }
 
@@ -19,6 +27,7 @@ Player::~Player()
 
 void Player::updatePosition(float dTime)
 {
+	
 	this->setBounds(this->player);
 	this->getWeapon()->setOwnerPosition(player.getPosition());
 	sf::FloatRect playerArea = this->getBounds();
@@ -47,7 +56,7 @@ void Player::updatePosition(float dTime)
 	{
 		this->isJumping = true;
 		velocity.y = -sqrtf(2.0f * 981.f * this->jumpHeight);
-		cout << "Jump" << endl;
+		
 
 	}
 	
@@ -55,7 +64,7 @@ void Player::updatePosition(float dTime)
 	this->getWeapon()->updatePosition(dTime);
 	this->velocity.y += 981.f * dTime;
 	this->player.move(velocity * dTime);
-	
+	this->checkForDeath();
 
 
 }
@@ -112,9 +121,30 @@ void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	this->getWeapon()->callDraw(target, states);
 }
 
+//void Player::operator = (Player& other)
+//{
+//	if (this != &other)
+//	{
+//
+//		delete this->getWeapon();
+//		this->score = other.score;
+//		this->position = other.position;
+//		this->velocity = other.velocity;
+//		this->player = other.player;
+//	
+//	}
+//
+//
+//}
+
 int Player::getScore() const
 {
 	return this->score;
+}
+
+string Player::getStats() const
+{
+	return this->getName() + " " + to_string(this->score) + " ";
 }
 
 sf::Shape* Player::getPlayer()
@@ -130,15 +160,24 @@ sf::Vector2f Player::getVelocity() const
 void Player::updateScore()
 {
 	this->score++;
+	cout << "Player Score: " << this->score << endl;
 }
 
-sf::Vector2f Player::getPlayerPosition()
+sf::Vector2f Player::getPlayerPosition() const
 {
 	return this->player.getPosition();
 }
 
 void Player::checkForDeath()
 {
+	if (this->getHealth() <= 0)
+	{
+		
+		(this->getGameInstancePointer()->*deathCallBack)(*this);
+	}
+
+
+
 }
 
 

@@ -2,13 +2,13 @@
 #include "Character.h"
 
 
-Weapon::Weapon(int damage)
+Weapon::Weapon(int damage) : damage(damage)
 {
 }
 
-Weapon::~Weapon()
-{
-}
+
+
+
 
 
 void Weapon::setOwnerPosition(sf::Vector2f newOwnerPosition)
@@ -28,7 +28,7 @@ void Weapon::dealDamage(Character& character) const
 
 void Weapon::setDidHit(bool hit)
 {
-	this->didHit = hit;
+	this->didHit = hit; 
 }
 
 

@@ -8,7 +8,7 @@
 
 using namespace std;
 
-
+class Game;
 class Weapon;
 
 class Character:public Movable
@@ -18,20 +18,24 @@ private:
 	string name;
 	Weapon* wep;
 	float moveSpeed;
+	Game* gameInstance = nullptr;
 	
 
 public:
 	Character() = default;
 	Character(Weapon* weapon, int newHealth, string newName, float newMoveSpeed);
-	~Character();
+	Character(Weapon* weapon, int newHealth, string newName, float newMoveSpeed, Game* gameInstance);
+	virtual ~Character();
 	
 
 	float getMoveSpeed() const;
 	virtual void checkForDeath() = 0;
+	Game* getGameInstancePointer() const;
 	virtual void updatePosition(float dTime) = 0;
 	Weapon* getWeapon() const;
 	void takeDamage(int damage);
 	int getHealth() const;
+	string getName() const;
 	
 	void setHealth(int newHealth);
 	void setMoveSpeed(float newMoveSpeed);

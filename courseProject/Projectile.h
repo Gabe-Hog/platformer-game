@@ -21,7 +21,6 @@ public:
 	Projectile() = default;
 	Projectile(float speed, int damage = 2);
 	Projectile(float speed, sf::Vector2f ownerPosition, sf::Vector2f targetPosition);
-	
 	~Projectile() = default;
 	void attack(sf::Vector2f targetPosition) override;
 	void updatePosition(float dTime) override;

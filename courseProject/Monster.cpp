@@ -2,26 +2,16 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
-#include "Game.h"
 #include <math.h>
 #include <utility>
-//Monster::Monster(): Character(new Projectile(2), 40, "Ross", 200.f), monster(sf::Vector2f(100, 100))
-//{
-//    
-//    this->monster.setFillColor(sf::Color::Magenta);
-//    this->monster.setOrigin(50,50);
-//    this->monster.setPosition(800,500);
-//    this->point.setPosition(800, 500);
-//    point.setOrigin(this->point.getRadius(), this->point.getRadius());
-//    this->setBounds(monster);
-//
-//}
+#include "Game.h"
 
-Monster::Monster(Player* player) : Character(new Projectile(200), 40, "Ross", 200.f), monster(sf::Vector2f(100, 100)), target(player)
+Monster::Monster(const Player& player , void (*deathCallBack)(const Player&)) :
+    Character(new Projectile(200), 5, "Ross", 200.f), monster(sf::Vector2f(100, 100)), target(player) , deathCallBack(deathCallBack)
 {
     this->monster.setFillColor(sf::Color::Magenta);
     this->monster.setOrigin(50, 50);
-    this->monster.setPosition(800, 500);
+    this->monster.setPosition(850, 550);
     this->point.setPosition(800, 500);
     point.setOrigin(this->point.getRadius(), this->point.getRadius());
     this->setBounds(monster);
@@ -71,14 +61,15 @@ void Monster::checkForDeath()
 {
     if (this->getHealth() <= 0)
     {
-        this->monster.setPosition(800, 500);
+        this->deathCallBack(this->target);
+        
         this->updateDifficulty();
-
-
+        this->monster.setPosition(800, 500);
+       
     }
 
 
-
+    
 }
 
 
@@ -101,7 +92,7 @@ void Monster::updatePosition(float dTime)
     this->setBounds(monster);
     this->getWeapon()->setOwnerPosition(monster.getPosition());
     sf::FloatRect monsterArea = this->getBounds();
-    sf::Vector2f targetPosition = this->target->getPlayerPosition();
+    sf::Vector2f targetPosition = this->target.getPlayerPosition();
     static float timeAccumulator = 0.0f;
     timeAccumulator += dTime;
 
@@ -136,11 +127,21 @@ void Monster::updatePosition(float dTime)
 
 void Monster::updateDifficulty()
 {
-    static int Health = 50;
+    static int health = 4;
+
+    health += 4;
     float moveSpeed = this->getMoveSpeed();
-    this->setHealth(Health);
+    this->setHealth(health);
     this->setMoveSpeed(moveSpeed+30);
-    this->setAttackSpeed(this->attackSpeed - 0.4);
-    Health += 20;
+    if (this->attackSpeed <= 1)
+    {
+        this->setAttackSpeed(this->attackSpeed - 0.02);
+    }
+    else
+    {
+        this->setAttackSpeed(this->attackSpeed - 1);
+    }
+    
+     cout << "AttackSpeed:" << this->attackSpeed << endl;
 }
 

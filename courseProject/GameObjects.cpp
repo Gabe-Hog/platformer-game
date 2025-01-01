@@ -1,9 +1,6 @@
 #include "GameObjects.h"
 
-GameObjects::~GameObjects()
-{
-	
-}
+
 
 void GameObjects::setBounds(sf::Shape& shape)
 {

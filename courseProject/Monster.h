@@ -5,7 +5,9 @@
 #include "Weapon.h"
 #include "Projectile.h"
 
+
 using namespace std;
+class Game;
 class Monster : public Character
 {
 private:
@@ -13,13 +15,14 @@ private:
 	
 	float attackSpeed = 4.0f;
 	sf::Vector2f randomPosition;
-	Player* target;
+	const Player& target;
 	sf::RectangleShape monster;
 	sf::CircleShape point = sf::CircleShape(10);
+	void (*deathCallBack)(const Player&) = nullptr;
 
 public:
 	Monster() = default;
-	Monster(Player* player);
+	Monster(const Player& player, void (*deathCallBack)(const Player&));
 	~Monster();
 	
 

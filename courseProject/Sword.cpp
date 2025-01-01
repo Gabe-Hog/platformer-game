@@ -8,10 +8,6 @@ Sword::Sword()
 	this->sword.setRotation(-90);
 }
 
-Sword::~Sword()
-{
-}
-
 void Sword::attack(sf::Vector2f targetDirection)
 {
 	

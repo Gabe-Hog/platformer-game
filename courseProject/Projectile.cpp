@@ -20,6 +20,11 @@ Projectile::Projectile(float speed, sf::Vector2f ownerPosition, sf::Vector2f tar
 
 
 
+
+
+
+
+
 void Projectile::attack(sf::Vector2f targetDirection)
 {
     sf::Vector2f test = this->getOwnerPosition();

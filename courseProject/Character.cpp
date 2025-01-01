@@ -1,21 +1,28 @@
 #include "Character.h"
 #include "Weapon.h"
 #include <iostream>
-Character::Character(Weapon* weapon, int newHealth, string newName, float newMoveSpeed) :
-	wep(weapon), health(newHealth), moveSpeed(newMoveSpeed)
-{
 
+
+
+
+Character::Character(Weapon* weapon, int newHealth, string newName, float newMoveSpeed) :
+	wep(weapon), health(newHealth), moveSpeed(newMoveSpeed), name(newName), gameInstance()
+{
+}
+
+Character::Character(Weapon* weapon, int newHealth, string newName, float newMoveSpeed, Game* gameInstance) :
+	wep(weapon), health(newHealth), moveSpeed(newMoveSpeed), name(newName), gameInstance(gameInstance)
+{
 }
 
 Character::~Character()
 {
 	delete this->wep;
+	
+
 }
 
-//void Character::setBounds(const sf::Shape& shape)
-//{
-//	this->bounds = shape.getGlobalBounds();
-//}
+
 
 
 
@@ -24,6 +31,11 @@ Character::~Character()
 float Character::getMoveSpeed() const
 {
 	return this->moveSpeed;
+}
+
+Game* Character::getGameInstancePointer() const
+{
+	return this->gameInstance;
 }
 
 Weapon* Character::getWeapon() const
@@ -40,6 +52,11 @@ void Character::takeDamage(int damage)
 int Character::getHealth() const
 {
 	return this->health;
+}
+
+string Character::getName() const
+{
+	return this->name;
 }
 
 void Character::setHealth(int newHealth)
