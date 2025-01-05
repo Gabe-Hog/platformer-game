@@ -1,8 +1,9 @@
 #ifndef MOVABLE_H
 #define MOVABLE_H
 
-#include "GameObjects.h"
-class Movable : public GameObjects
+#include "SFML/Graphics.hpp"
+
+class Movable
 {
 private:
 	sf::Vector2f direction;
@@ -10,8 +11,8 @@ private:
 
 public:
 	Movable() = default;
+	Movable(Movable&) = default;
 	~Movable();
-	virtual void updatePosition(float dTime) = 0;
 	void setDirection(sf::Vector2f newDirection);
 	sf::Vector2f getNormalizedDirection();
 	

@@ -5,24 +5,29 @@
 #include <iostream>
 #include <algorithm>
 
-MainMenu::MainMenu(sf::RenderWindow& window, string infoText) : window(window)
+
+MainMenu::MainMenu(sf::RenderWindow& window, assetHandler<sf::Font>* handler, string infoText) : window(window), fontHandler(handler)
 {
-	
-	this->readFont();
 	this->text.setString(infoText);
 	sf::FloatRect textBounds = this->text.getLocalBounds();
-	this->text.setOrigin(textBounds.left + textBounds.width / 2.0f, textBounds.top + textBounds.height / 2.f);
 	this->text.setCharacterSize(30);
 	this->text.setFillColor(sf::Color::Red);
+	this->textFont = fontHandler->getAsset("menuFont");
 	this->text.setFont(textFont);
 	this->text.setPosition(this->window.getSize().x / 5.f, this->window.getSize().y / 3.f);
-	this->scoreBoardText.setFont(textFont);
 	this->scoreBoardText.setCharacterSize(20);
-	this->scoreBoardText.setPosition(this->window.getSize().x/2.f, this->window.getSize().y / 3.f);
+	this->scoreBoardText.setFont(this->textFont);
+	this->scoreBoardText.setLetterSpacing(2);
+	this->scoreBoardText.setPosition(this->window.getSize().x/2.5f, this->window.getSize().y / 3.f);
 	this->scoreBoardText.setFillColor(sf::Color::White);
 	this->initButtons();
 	
 
+
+}
+
+MainMenu::~MainMenu()
+{
 
 }
 
@@ -91,14 +96,6 @@ void MainMenu::setPlay(bool newPlay)
 	this->play = newPlay;
 }
 
-void MainMenu::readFont()
-{
-	if (!this->textFont.loadFromFile("fonts/Branda-yolq.ttf"))
-	{
-		throw("Error::Could Not Read Font::MainMenu.cpp");
-	}
-	
-}
 
 bool MainMenu::returnPlayTrue()
 {
@@ -108,10 +105,18 @@ bool MainMenu::returnPlayTrue()
 
 bool MainMenu::manageScoreBoard()
 {
-	vector<string> lines = readScoreBoard();
-	sortScoreBoard(lines);
-	lines = formatScore(lines);
-	printTopFiveScore(lines);
+	try
+	{
+		vector<string> lines = readScoreBoard();
+		sortScoreBoard(lines);
+		lines = formatScore(lines);
+		printTopFiveScore(lines);
+	}
+	catch (runtime_error e)
+	{
+		this->scoreBoardText.setString(e.what());
+	}
+
 
 	return true;
 }
@@ -145,8 +150,6 @@ vector<string> MainMenu::formatScore(vector<string> scoreBoard)
 
 void MainMenu::sortScoreBoard(vector<string>& scoreBoardContent)
 {
-	
-	
 
 	for (int i = 0; i < scoreBoardContent.size(); i++)
 	{
@@ -182,7 +185,7 @@ vector<string> MainMenu::readScoreBoard()
 	ifstream inPut("scoreBoard.txt");
 	if (!inPut.is_open())
 	{
-		throw("Error::Could Not Open File::");
+		throw runtime_error("Error::Could Not Open File::");
 	}
 	while (getline(inPut, line))
 	{
@@ -194,7 +197,4 @@ vector<string> MainMenu::readScoreBoard()
 
 }
 
-MainMenu::~MainMenu()
-{
 
-}

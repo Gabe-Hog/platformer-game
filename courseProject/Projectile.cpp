@@ -18,6 +18,10 @@ Projectile::Projectile(float speed, sf::Vector2f ownerPosition, sf::Vector2f tar
     this->shape.setPosition(ownerPosition);
 }
 
+Projectile::Projectile(const Projectile& other) : Weapon(other), speed(other.speed), isMoving(other.isMoving), shape(shape), targetPosition(other.targetPosition)
+{
+}
+
 
 
 
@@ -117,6 +121,11 @@ void Projectile::removeProjectile()
 void Projectile::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     
+}
+
+Weapon* Projectile::clone()
+{
+    return new Projectile(*this);
 }
 
 bool Projectile::outOfBounds() const

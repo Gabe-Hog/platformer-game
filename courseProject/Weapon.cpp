@@ -21,6 +21,8 @@ sf::Vector2f Weapon::getOwnerPosition() const
 	return this->ownerPosition;
 }
 
+
+
 void Weapon::dealDamage(Character& character) const
 {
 	character.takeDamage(this->damage);

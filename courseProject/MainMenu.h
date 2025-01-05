@@ -6,6 +6,8 @@
 #include <string>
 #include "SFML/Graphics.hpp"
 #include "Button.h"
+#include "assetHandler.h"
+
 
 using namespace std;
 class MainMenu
@@ -17,6 +19,7 @@ private:
 	sf::Font textFont;
 	sf::Text text;
 	sf::Text scoreBoardText;
+	assetHandler<sf::Font>* fontHandler;
 	vector<unique_ptr<Button>> menuButtons;
 	
 	bool play = false;
@@ -24,13 +27,14 @@ private:
 public:
 
 	MainMenu() = default;
-	MainMenu(sf::RenderWindow& window, string infoText = "Hello World!");
+	MainMenu(sf::RenderWindow& window, assetHandler<sf::Font>* handler, string infoText = "Hello World!");
+	~MainMenu();
 	void displayMenu();
 	
 	bool runMenu();
 	void initButtons();
 	void setPlay(bool newPlay);
-	void readFont();
+	
 	bool returnPlayTrue();
 	bool manageScoreBoard();
 	void printTopFiveScore(vector<string> scoreBoard);
@@ -39,7 +43,7 @@ public:
 	vector<string> readScoreBoard();
 
 
-	~MainMenu();
+	
 
 
 

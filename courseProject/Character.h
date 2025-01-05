@@ -2,8 +2,9 @@
 #define CHARACTER_H
 
 #include <string>
+#include "GameObjects.h"
 #include "Movable.h"
-
+#include "assetHandler.h"
 
 
 using namespace std;
@@ -11,23 +12,31 @@ using namespace std;
 class Game;
 class Weapon;
 
-class Character:public Movable
+class Character:public GameObjects
+
 {
 private:
 	int health;
 	string name;
-	Weapon* wep;
+	Weapon* weapon;
 	float moveSpeed;
 	Game* gameInstance = nullptr;
+	assetHandler<sf::Font>* fontHandler;
+	sf::Text characterText;
+	sf::Font nameFont = fontHandler->getAsset("nameFont");
+	assetHandler<sf::Texture>* textureHandler;
+	sf::Sprite characterSprite;
+	sf::Texture characterTexture;
 	
 
 public:
 	Character() = default;
-	Character(Weapon* weapon, int newHealth, string newName, float newMoveSpeed);
-	Character(Weapon* weapon, int newHealth, string newName, float newMoveSpeed, Game* gameInstance);
+	Character(Weapon* weapon, int newHealth, string newName, float newMoveSpeed, assetHandler<sf::Font>* fontHandler, assetHandler<sf::Texture>* textureHandler);
+	Character(Weapon* weapon, int newHealth, string newName, float newMoveSpeed, Game* gameInstance, assetHandler<sf::Font>* fontHandler, assetHandler<sf::Texture>* textureHandler);
+	Character(const Character& other);
 	virtual ~Character();
 	
-
+	
 	float getMoveSpeed() const;
 	virtual void checkForDeath() = 0;
 	Game* getGameInstancePointer() const;
@@ -36,9 +45,16 @@ public:
 	void takeDamage(int damage);
 	int getHealth() const;
 	string getName() const;
-	
+	string characterToString() const;
+	void setNameTextPosition(sf::Vector2f pos);
+	sf::Text getText() const;
 	void setHealth(int newHealth);
 	void setMoveSpeed(float newMoveSpeed);
+	void setTexture(string keyWord);
+	void setSpriteTexture(string keyWord);
+	sf::Sprite& getReferenceToSprite();
+	virtual GameObjects* clone() = 0;
+	
 
 };
 #endif

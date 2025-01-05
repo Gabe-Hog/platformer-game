@@ -2,13 +2,13 @@
 #define WEAPON_H
 
 
-#include "Movable.h"
+#include "GameObjects.h"
 
 
 class Character;
 
 
-class Weapon : public Movable
+class Weapon : public GameObjects
 {
 private:
 
@@ -20,6 +20,7 @@ public:
 
 	Weapon() = default;
 	Weapon(int damage);
+	Weapon(const Weapon&) = default;
 	virtual ~Weapon() = default;
 	virtual void callDraw(sf::RenderTarget& target, sf::RenderStates states) = 0;
 	virtual void attack(sf::Vector2f targetDirection = {0.f,0.f}) = 0;
@@ -28,6 +29,7 @@ public:
 	bool hit() const;
 	void setOwnerPosition(sf::Vector2f newOwnerPosition);
 	sf::Vector2f getOwnerPosition() const;
+	virtual Weapon* clone() = 0;
 	void dealDamage(Character& character) const;
 
 };

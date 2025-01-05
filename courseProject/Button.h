@@ -20,7 +20,7 @@ public:
 
 	Button() = default;
 	Button(bool(MainMenu::* onPressCallBack)(), MainMenu& menu, sf::Font& font, sf::Vector2f position, string buttonText = "Exit");
-	/*Button(string buttonText);*/
+	
 	void checkForButtonPress(sf::Vector2f& mouseCursor, sf::Event& e);
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 	~Button();

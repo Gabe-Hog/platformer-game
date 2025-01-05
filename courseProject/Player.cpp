@@ -2,22 +2,26 @@
 #include "Game.h"
 #include <math.h>
 #include <iostream>
-Player::Player() :
-	Character(new Sword(), 5, "Bob", 200.f), position(25, 525), player(sf::Vector2f(50, 50))
+
+
+Player::Player(void(Game::*deathCallBack)(const Player&), Game* gameInstance, assetHandler<sf::Font>* fontHandler, assetHandler<sf::Texture>* textureHandler) :
+	Character(new Sword(textureHandler->getAsset("sword")), 5, "Bob", 200.f, gameInstance, fontHandler, textureHandler), deathCallBack(deathCallBack), position(25, 525)
 {
-	
-	player.setFillColor(sf::Color::Red);
-	player.setPosition(position);
-	player.setOrigin(player.getSize().x/2, player.getSize().y/2);
-	this->setBounds(player);
+
+	this->setSpriteTexture("chick");
+	playerSprite = getReferenceToSprite();
+	this->playerSprite.setPosition(position);
+	sf::FloatRect bounds = this->playerSprite.getLocalBounds();
+	playerSprite.setOrigin(bounds.width/2.f, bounds.height/2.f);
+	this->playerSprite.setScale(0.019f, 0.02f);
+	this->setBounds(playerSprite);
+	this->setNameTextPosition({ 0.f, 0.f });
+
 }
 
-Player::Player(void(Game::*deathCallBack)(const Player&), Game* gameInstance) : Character(new Sword(), 1, "Bob", 200.f, gameInstance), deathCallBack(deathCallBack), position(25, 525), player(sf::Vector2f(50, 50))
+Player::Player(const Player& other) : Character(other), score(other.score), playerSprite(other.playerSprite),position(other.position), 
+velocity(other.velocity), jumpHeight(other.jumpHeight), isJumping(other.isJumping), deathCallBack(other.deathCallBack)
 {
-	player.setFillColor(sf::Color::Red);
-	player.setPosition(position);
-	player.setOrigin(player.getSize().x / 2, player.getSize().y / 2);
-	this->setBounds(player);
 }
 
 Player::~Player()
@@ -28,8 +32,11 @@ Player::~Player()
 void Player::updatePosition(float dTime)
 {
 	
-	this->setBounds(this->player);
-	this->getWeapon()->setOwnerPosition(player.getPosition());
+	
+	this->setBounds(this->playerSprite);
+	this->getWeapon()->setOwnerPosition(this->getPlayerPosition());
+	
+	
 	sf::FloatRect playerArea = this->getBounds();
 	this->velocity.x = 0.f;
 
@@ -63,7 +70,7 @@ void Player::updatePosition(float dTime)
 
 	this->getWeapon()->updatePosition(dTime);
 	this->velocity.y += 981.f * dTime;
-	this->player.move(velocity * dTime);
+	this->playerSprite.move(velocity * dTime);
 	this->checkForDeath();
 
 
@@ -72,33 +79,34 @@ void Player::updatePosition(float dTime)
 bool Player::checkCollision(GameObjects& object1)
 {
 	bool collisionMonster = false;
-	sf::FloatRect playerbounds = this->getBounds();
+	sf::FloatRect playerBounds = this->getBounds();
 
-	if (player.getPosition().x - playerbounds.width/2 < 0.f)
+	if (playerSprite.getPosition().x - playerBounds.width/2.f < 0.f)
 	{
-		player.setPosition(player.getOrigin().x, player.getPosition().y);
+		playerSprite.setPosition(playerBounds.width/2.f, playerSprite.getPosition().y);
 	}
 
-	if (player.getPosition().x + playerbounds.width/2 > WIDTH)
+	if (playerSprite.getPosition().x + playerBounds.width/2 > WIDTH)
 	{
-		player.setPosition(WIDTH - playerbounds.width/2, player.getPosition().y);
+		playerSprite.setPosition(WIDTH - playerBounds.width/2, playerSprite.getPosition().y);
 	}
 
-	if (player.getPosition().y + playerbounds.height/2 > HEIGHT)
-	{
-		this->isJumping = false;
-		player.setPosition(player.getPosition().x, HEIGHT - playerbounds.height/2);
-	}
-
-	if (player.getPosition().y/2 < 0.f)
+	if (playerSprite.getPosition().y + playerBounds.height/2 > HEIGHT)
 	{
 		
-		player.setPosition(player.getPosition().x, 0.f);
+		playerSprite.setPosition(playerSprite.getPosition().x, HEIGHT - playerBounds.height/2);
+		this->isJumping = false;
+	}
+
+	if (playerSprite.getPosition().y/2 < 0.f)
+	{
+		
+		playerSprite.setPosition(playerSprite.getPosition().x, 0.f);
 		
 	}
 
 	this->getWeapon()->checkCollision(object1);
-
+	
 
 
 
@@ -117,25 +125,27 @@ void Player::setVelocity(sf::Vector2f newVel)
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	target.draw(this->player);
+	/*sf::FloatRect bounds = playerSprite.getGlobalBounds();
+	sf::RectangleShape boundingBox(sf::Vector2f(bounds.width, bounds.height));
+	boundingBox.setPosition(bounds.left, bounds.top);
+	boundingBox.setFillColor(sf::Color::Transparent);
+	boundingBox.setOutlineColor(sf::Color::Red);
+	boundingBox.setOutlineThickness(1.f);
+	sf::CircleShape originMarker(2.f);
+	originMarker.setFillColor(sf::Color::Green);
+	originMarker.setPosition(playerSprite.getPosition().x - 2, playerSprite.getPosition().y - 2);
+	target.draw(originMarker);
+	target.draw(boundingBox);*/
+	target.draw(this->playerSprite);
+	target.draw(this->getText());
 	this->getWeapon()->callDraw(target, states);
 }
 
-//void Player::operator = (Player& other)
-//{
-//	if (this != &other)
-//	{
-//
-//		delete this->getWeapon();
-//		this->score = other.score;
-//		this->position = other.position;
-//		this->velocity = other.velocity;
-//		this->player = other.player;
-//	
-//	}
-//
-//
-//}
+GameObjects* Player::clone()
+{
+	return new Player(*this);
+}
+
 
 int Player::getScore() const
 {
@@ -147,9 +157,9 @@ string Player::getStats() const
 	return this->getName() + " " + to_string(this->score) + " ";
 }
 
-sf::Shape* Player::getPlayer()
+sf::Sprite* Player::getPlayer()
 {
-	return &this->player;
+	return &this->playerSprite;
 }
 
 sf::Vector2f Player::getVelocity() const
@@ -165,7 +175,7 @@ void Player::updateScore()
 
 sf::Vector2f Player::getPlayerPosition() const
 {
-	return this->player.getPosition();
+	return this->playerSprite.getPosition();
 }
 
 void Player::checkForDeath()

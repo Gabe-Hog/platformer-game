@@ -3,12 +3,13 @@
 #include "Timer.h"
 #include "GameObjects.h"
 #include "SFML/Graphics.hpp"
-#include "GameObjects.h"
 #include "Player.h"
 #include "Monster.h"
 #include "Platform.h"
 #include <vector>
 #include "Timer.h"
+#include "assetHandler.h"
+
 using namespace std;
 static float WIDTH = 900;
 static float HEIGHT = 600;
@@ -17,6 +18,8 @@ class Game
 private:
 	sf::RenderWindow window;
 	Timer timer;
+	assetHandler<sf::Font>* fontHandler = new assetHandler<sf::Font>;
+	assetHandler<sf::Texture>* textureHandler = new assetHandler<sf::Texture>;
 	vector<GameObjects*> objects;
 	bool roundEnded = false;
 	void eventHandle();
@@ -25,18 +28,20 @@ private:
 
 
 public:
-	void initGameObjects();
 	
 	Game();
+	Game(const Game& other);
 	~Game();
 	void run();
 	bool addObject(GameObjects* aObject);
+	void initGameObjects();
 	void updateObjectPosition(float dTime);
 	void makeCollisionCheck();
 	static void updatePlayersScore(const Player& player);
 	void endRound(const Player&);
 	void writeScoreToFile(string score);
-	void startMainMenu();
+	
+
 	
 
 
