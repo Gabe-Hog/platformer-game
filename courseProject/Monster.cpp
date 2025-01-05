@@ -11,13 +11,13 @@ Monster::Monster(const Player& player , void (*deathCallBack)(const Player&), as
 {
 
 
-    this->setSpriteTexture("enemyOven");
-    monsterSprite = getReferenceToSprite();
+    this->setCharacterTexture("enemyOven");
+    
     this->monsterSprite.setPosition(850, 550);
     sf::FloatRect bounds = this->monsterSprite.getLocalBounds();
     monsterSprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
 
-
+    this->monsterSprite.setTexture(this->getTexture());
     this->monsterSprite.setOrigin(50, 50);
     this->monsterSprite.setPosition(850, 550);
     this->point.setPosition(800, 500);

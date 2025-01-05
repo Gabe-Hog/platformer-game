@@ -26,7 +26,7 @@ Character::Character(Weapon* weapon, int newHealth, string newName, float newMov
 
 Character::Character(const Character& other) : 
 	weapon(other.weapon->clone()), health(other.health), name(other.name), moveSpeed(other.moveSpeed), fontHandler(other.fontHandler), 
-	textureHandler(other.textureHandler), gameInstance(other.gameInstance), characterText(other.characterText), nameFont(other.nameFont), characterSprite(other.characterSprite)
+	textureHandler(other.textureHandler), gameInstance(other.gameInstance), characterText(other.characterText), nameFont(other.nameFont), characterTexture(other.characterTexture)
 {
 }
 
@@ -100,7 +100,7 @@ void Character::setMoveSpeed(float newMoveSpeed)
 	this->moveSpeed = newMoveSpeed;
 }
 
-void Character::setTexture(string keyWord)
+void Character::setCharacterTexture(string keyWord)
 {
 	try
 	{
@@ -112,16 +112,12 @@ void Character::setTexture(string keyWord)
 	}
 }
 
-void Character::setSpriteTexture(string keyWord)
+sf::Texture& Character::getTexture()
 {
-	this->characterTexture = this->textureHandler->getAsset(keyWord);
-	this->characterSprite.setTexture(this->characterTexture);
+	return this->characterTexture;
 }
 
-sf::Sprite& Character::getReferenceToSprite() 
-{
-	return this->characterSprite;
-}
+
 
 
 

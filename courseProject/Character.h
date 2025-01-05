@@ -25,7 +25,7 @@ private:
 	sf::Text characterText;
 	sf::Font nameFont = fontHandler->getAsset("nameFont");
 	assetHandler<sf::Texture>* textureHandler;
-	sf::Sprite characterSprite;
+	/*sf::Sprite characterSprite;*/
 	sf::Texture characterTexture;
 	
 
@@ -50,9 +50,9 @@ public:
 	sf::Text getText() const;
 	void setHealth(int newHealth);
 	void setMoveSpeed(float newMoveSpeed);
-	void setTexture(string keyWord);
-	void setSpriteTexture(string keyWord);
-	sf::Sprite& getReferenceToSprite();
+	sf::Texture& getTexture();
+	void setCharacterTexture(string keyWord);
+	/*sf::Sprite& getReferenceToSprite();*/
 	virtual GameObjects* clone() = 0;
 	
 

@@ -6,8 +6,6 @@
 *.user
 *.userosscache
 *.sln.docstates
-
-# User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
 # Build results
@@ -21,13 +19,29 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+*.obj
+*.exe
+*.pdb
+*.ilk
+*.meta
+*.pch
+*.idb
+*.tlog
+*.lastbuildstate
+*.tmp
+*.log
 
-# Visual Studio 2015 cache/options directory
+# Visual Studio directories and temporary files
 .vs/
-# Uncomment if you have tasks that create the project's static files in wwwroot
-#wwwroot/
+.vscode/
+*.vcxproj.user
+*.sdf
+*.opensdf
+*.cache
+*.VC.db
+*.VC.VC.opendb
 
-# MSTest test Results
+# MSTest test results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
@@ -48,21 +62,11 @@ artifacts/
 *_i.c
 *_p.c
 *_i.h
-*.ilk
-*.meta
-*.obj
-*.pch
-*.pdb
-*.pgc
-*.pgd
 *.rsp
 *.sbr
 *.tlb
 *.tli
 *.tlh
-*.tmp
-*.tmp_proj
-*.log
 *.vspscc
 *.vssscc
 .builds
@@ -78,11 +82,7 @@ ipch/
 *.aps
 *.ncb
 *.opendb
-*.opensdf
-*.sdf
 *.cachefile
-*.VC.db
-*.VC.VC.opendb
 
 # Visual Studio profiler
 *.psess
@@ -264,7 +264,6 @@ __pycache__/
 /bin
 
 # ignore stuff from SFML.Net
-
 obj/
 lib/
 examples/*/*.dll

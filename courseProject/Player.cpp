@@ -8,8 +8,9 @@ Player::Player(void(Game::*deathCallBack)(const Player&), Game* gameInstance, as
 	Character(new Sword(textureHandler->getAsset("sword")), 5, "Bob", 200.f, gameInstance, fontHandler, textureHandler), deathCallBack(deathCallBack), position(25, 525)
 {
 
-	this->setSpriteTexture("chick");
-	playerSprite = getReferenceToSprite();
+
+	this->setCharacterTexture("chick");
+	this->playerSprite.setTexture(getTexture());
 	this->playerSprite.setPosition(position);
 	sf::FloatRect bounds = this->playerSprite.getLocalBounds();
 	playerSprite.setOrigin(bounds.width/2.f, bounds.height/2.f);
@@ -125,17 +126,7 @@ void Player::setVelocity(sf::Vector2f newVel)
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	/*sf::FloatRect bounds = playerSprite.getGlobalBounds();
-	sf::RectangleShape boundingBox(sf::Vector2f(bounds.width, bounds.height));
-	boundingBox.setPosition(bounds.left, bounds.top);
-	boundingBox.setFillColor(sf::Color::Transparent);
-	boundingBox.setOutlineColor(sf::Color::Red);
-	boundingBox.setOutlineThickness(1.f);
-	sf::CircleShape originMarker(2.f);
-	originMarker.setFillColor(sf::Color::Green);
-	originMarker.setPosition(playerSprite.getPosition().x - 2, playerSprite.getPosition().y - 2);
-	target.draw(originMarker);
-	target.draw(boundingBox);*/
+	
 	target.draw(this->playerSprite);
 	target.draw(this->getText());
 	this->getWeapon()->callDraw(target, states);

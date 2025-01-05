@@ -1,3 +1,2 @@
-﻿  main.cpp
-C:\Users\gabri\source\repos\courseProject\courseProject\main.cpp(17,11): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
+﻿  Player.cpp
   courseProject.vcxproj -> C:\Users\gabri\source\repos\courseProject\x64\Debug\courseProject.exe
