@@ -9,7 +9,7 @@
 
 
 
-Game::Game() : window(sf::VideoMode(WIDTH, HEIGHT), "test")
+Game::Game() : window(sf::VideoMode(WIDTH, HEIGHT), "Revenge Of The Chick")
 {
 	window.setFramerateLimit(60);
 	try

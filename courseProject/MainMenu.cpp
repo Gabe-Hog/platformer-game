@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include "stdlib.h"
 
 
 MainMenu::MainMenu(sf::RenderWindow& window, assetHandler<sf::Font>* handler, string infoText) : window(window), fontHandler(handler)
@@ -23,7 +24,7 @@ MainMenu::MainMenu(sf::RenderWindow& window, assetHandler<sf::Font>* handler, st
 	this->initButtons();
 	
 
-
+	
 }
 
 MainMenu::~MainMenu()
@@ -52,7 +53,7 @@ void MainMenu::displayMenu()
 
 bool MainMenu::runMenu()
 {
-	while (!play)
+	while (!play && !programClose)
 	{
 		this->mouseCursorPosition = this->window.mapPixelToCoords(sf::Mouse::getPosition(this->window));
 		displayMenu();
@@ -61,6 +62,7 @@ bool MainMenu::runMenu()
 		{
 			if (e.type == sf::Event::Closed)
 				return false;
+		
 			if(e.type == sf::Event::MouseButtonPressed)
 			{
 				for (int i = 0; i < menuButtons.size(); i++)
@@ -72,7 +74,6 @@ bool MainMenu::runMenu()
 		}
 
 		
-
 	}
 
 	return true;
@@ -85,8 +86,8 @@ void MainMenu::initButtons()
 		sf::Vector2f(this->window.getSize().x / 5.f, this->window.getSize().y / 2.5f), "Play Game"));
 	this->menuButtons.push_back(make_unique<Button>(&MainMenu::manageScoreBoard, *this, this->textFont,
 		sf::Vector2f(this->window.getSize().x / 5.f, this->window.getSize().y / 2.5f+ 30.f), "Show ScoreBoard"));
-	/*this->menuButtons.push_back(make_unique<Button>(&MainMenu::readScoreBoard, *this, this->textFont,
-		sf::Vector2f(this->window.getSize().x / 5.f, this->window.getSize().y / 2.5f+ 60.f)));*/
+	this->menuButtons.push_back(make_unique<Button>(&MainMenu::closeProgram, *this, this->textFont,
+		sf::Vector2f(this->window.getSize().x / 5.f, this->window.getSize().y / 2.5f+ 60.f)));
 
 }
 
@@ -118,6 +119,14 @@ bool MainMenu::manageScoreBoard()
 	}
 
 
+	return true;
+}
+
+bool MainMenu::closeProgram()
+{
+
+	this->programClose = true;
+	this->window.close();
 	return true;
 }
 

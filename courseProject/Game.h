@@ -9,6 +9,7 @@
 #include <vector>
 #include "Timer.h"
 #include "assetHandler.h"
+#include <stdlib.h>
 
 using namespace std;
 static float WIDTH = 900;
@@ -22,6 +23,7 @@ private:
 	assetHandler<sf::Texture>* textureHandler = new assetHandler<sf::Texture>;
 	vector<GameObjects*> objects;
 	bool roundEnded = false;
+	
 	void eventHandle();
 	void update(float dTime);
 	void render();

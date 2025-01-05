@@ -1,2 +1,7 @@
-﻿  Player.cpp
+﻿  Button.cpp
+  Game.cpp
+C:\Users\gabri\source\repos\courseProject\courseProject\Game.cpp(12,44): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\gabri\source\repos\courseProject\courseProject\Game.cpp(12,37): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+  MainMenu.cpp
+  Generating Code...
   courseProject.vcxproj -> C:\Users\gabri\source\repos\courseProject\x64\Debug\courseProject.exe

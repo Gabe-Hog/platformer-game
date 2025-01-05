@@ -7,15 +7,17 @@ using namespace std;
 
 
 BOOL WINAPI catchWrongfulClosing(DWORD signal);
+
 Game* game;
 
 int main()
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-
+	SetConsoleCtrlHandler(catchWrongfulClosing, TRUE);
+	
 	game = new Game();
 	int srand(time(0));
-	SetConsoleCtrlHandler(catchWrongfulClosing, TRUE);
+	
 	game->run();
 	
 	delete game;

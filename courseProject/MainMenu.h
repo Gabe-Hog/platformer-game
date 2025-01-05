@@ -23,6 +23,7 @@ private:
 	vector<unique_ptr<Button>> menuButtons;
 	
 	bool play = false;
+	bool programClose= false;
 
 public:
 
@@ -37,6 +38,7 @@ public:
 	
 	bool returnPlayTrue();
 	bool manageScoreBoard();
+	bool closeProgram();
 	void printTopFiveScore(vector<string> scoreBoard);
 	vector<string> formatScore(vector<string> scoreBoard);
 	void sortScoreBoard(vector<string>& scoreBoardConetent);
