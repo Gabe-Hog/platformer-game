@@ -81,6 +81,7 @@ void Game::render()
 	for (int i = 0; i < objects.size(); i++)
 	{
 		this->window.draw(*this->objects[i]);
+		
 	}
 	this->window.display();
 }
@@ -93,10 +94,10 @@ void Game::initGameObjects()
 
 	this->addObject(yourPlayer);
 	this->addObject(new Monster(*yourPlayer, updatePlayersScore, this->fontHandler, this->textureHandler));
-	this->addObject(new Platform(sf::Vector2f(100, 500), sf::Color::Green, 200.f, 20.f));
-	this->addObject(new Platform(sf::Vector2f(400, 400), sf::Color::Yellow, 100.f, 20.f));
-	this->addObject(new Platform(sf::Vector2f(150, 250), sf::Color::Yellow, 150.f, 20.f));
-	this->addObject(new Platform(sf::Vector2f(450, 170), sf::Color::Blue, 70.f, 20.f));
+	this->addObject(new Platform(sf::Vector2f(100, 500), 200.f, 20.f));
+	this->addObject(new Platform(sf::Vector2f(400, 400), 100.f, 20.f));
+	this->addObject(new Platform(sf::Vector2f(150, 250), 150.f, 20.f));
+	this->addObject(new Platform(sf::Vector2f(450, 170), 70.f, 20.f));
 	this->addObject(new Platform(sf::Vector2f(0, HEIGHT-1.f), sf::Color::Transparent, WIDTH, 1.f));
 	
 }
@@ -111,7 +112,9 @@ void Game::run()
 		return;
 	}
 	roundEnded = false;
+	
 	initGameObjects();
+	this->timer.getClock()->restart();
 
 	while (this->window.isOpen())
 	{

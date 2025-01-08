@@ -40,7 +40,7 @@ void Sword::updatePosition(float dTime)
 	}
 }
 
-bool Sword::checkCollision(GameObjects& object1)
+void Sword::checkCollision(GameObjects& object1)
 {
 	if (Monster* monster = dynamic_cast<Monster*>(&object1))
 	{
@@ -51,13 +51,12 @@ bool Sword::checkCollision(GameObjects& object1)
 			this->dealDamage(*monster);
 			this->setDidHit(true);
 			
-
-			
+	
 		}
 
 
 	}
-	return false;
+	
 }
 
 void Sword::callDraw(sf::RenderTarget& target, sf::RenderStates states)

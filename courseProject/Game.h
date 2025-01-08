@@ -27,7 +27,9 @@ private:
 	void eventHandle();
 	void update(float dTime);
 	void render();
-
+	void updateObjectPosition(float dTime);
+	void makeCollisionCheck();
+	void initGameObjects();
 
 public:
 	
@@ -36,9 +38,6 @@ public:
 	~Game();
 	void run();
 	bool addObject(GameObjects* aObject);
-	void initGameObjects();
-	void updateObjectPosition(float dTime);
-	void makeCollisionCheck();
 	static void updatePlayersScore(const Player& player);
 	void endRound(const Player&);
 	void writeScoreToFile(string score);

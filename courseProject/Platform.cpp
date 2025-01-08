@@ -2,7 +2,7 @@
 #include "Player.h"
 #include <iostream>
 Platform::Platform(sf::Vector2f pos, sf::Color colour, float width, float height) 
-	: pos(pos), width(width), height(height), platform(sf::Vector2f(width, height))
+	: width(width), height(height), platform(sf::Vector2f(width, height))
 {
 	this->platform.setFillColor(colour);
 	this->platform.setPosition(pos);
@@ -11,13 +11,22 @@ Platform::Platform(sf::Vector2f pos, sf::Color colour, float width, float height
 
 
 
+Platform::Platform(sf::Vector2f pos, float width, float height) : 
+	width(width), height(height), platform(sf::Vector2f(width, height)), colour(141, 128, 128)
+{
+	this->platform.setFillColor(colour);
+	this->platform.setPosition(pos);
+	this->setBounds(platform);
+}
+
+
 Platform::~Platform()
 {
 }
 
-bool Platform::checkCollision(GameObjects & object)
+void Platform::checkCollision(GameObjects & object)
 {
-	bool didCollide = false;
+	
 	if(Player* player = dynamic_cast<Player*>(&object))
 	{ 
 		sf::FloatRect playerBounds = player->getBounds(); 
@@ -28,9 +37,9 @@ bool Platform::checkCollision(GameObjects & object)
 			if (playerBounds.top + playerBounds.height > platformBounds.top - playerBounds.height && player->getVelocity().y > 0)
 			{
 				player->setVelocity({ 0,0 });
-				player->getPlayer()->setPosition(player->getPlayer()->getPosition().x, platformBounds.top - playerBounds.height/2);
+				player->setSpritePosition({ player->getSpritePosition().x, platformBounds.top - playerBounds.height/2.f});
 				player->setJumping(false);
-				didCollide = true;
+				
 
 			}
 		}
@@ -44,7 +53,7 @@ bool Platform::checkCollision(GameObjects & object)
 	}
 
 
-	return didCollide;
+	
 }
 
 void Platform::draw(sf::RenderTarget& target, sf::RenderStates states) const

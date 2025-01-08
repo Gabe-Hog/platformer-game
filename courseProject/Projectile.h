@@ -25,7 +25,7 @@ public:
 	~Projectile() = default;
 	void attack(sf::Vector2f targetPosition) override;
 	void updatePosition(float dTime) override;
-	bool checkCollision(GameObjects& object1) override;
+	void checkCollision(GameObjects& object1) override;
 	void callDraw(sf::RenderTarget& target, sf::RenderStates states);
 	void removeProjectile();
 	

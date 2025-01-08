@@ -29,7 +29,6 @@ BOOL WINAPI catchWrongfulClosing(DWORD signal)
 {
 	if (signal == CTRL_CLOSE_EVENT)
 	{
-
 		cout << "Caught WrongFul Closing! Memory will be cleaned" << endl;
 		delete game;
 		return TRUE;

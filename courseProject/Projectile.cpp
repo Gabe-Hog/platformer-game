@@ -66,9 +66,9 @@ void Projectile::updatePosition(float dTime)
   
 }
 
-bool Projectile::checkCollision(GameObjects& object1)
+void Projectile::checkCollision(GameObjects& object1)
 {
-    bool didCollide = false;
+   
     for (auto& projectile : this->projectiles)
     
     {
@@ -78,9 +78,7 @@ bool Projectile::checkCollision(GameObjects& object1)
 
             if (character->getBounds().contains(projectile->shape.getPosition()))
             {
-                didCollide = true;
-                
-                
+          
                 this->dealDamage(*character);
                 projectile->setDidHit(true);
             }
@@ -92,7 +90,7 @@ bool Projectile::checkCollision(GameObjects& object1)
             {
                 
                 projectile->setDidHit(true);
-                didCollide = true;
+               
             }
 
         }
@@ -100,7 +98,7 @@ bool Projectile::checkCollision(GameObjects& object1)
         
     }
 
-    return didCollide;
+
 }
 
 void Projectile::callDraw(sf::RenderTarget& target, sf::RenderStates states)

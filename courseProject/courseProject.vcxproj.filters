@@ -98,7 +98,7 @@
     <ClInclude Include="Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="assetHandler.h">
+    <ClInclude Include="AssetHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

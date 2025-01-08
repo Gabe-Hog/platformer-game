@@ -4,23 +4,24 @@
 #include <iostream>
 
 
+
 Player::Player(void(Game::*deathCallBack)(const Player&), Game* gameInstance, assetHandler<sf::Font>* fontHandler, assetHandler<sf::Texture>* textureHandler) :
-	Character(new Sword(textureHandler->getAsset("sword")), 5, "Bob", 200.f, gameInstance, fontHandler, textureHandler), deathCallBack(deathCallBack), position(25, 525)
+	Character(new Sword(textureHandler->getAsset("sword")), 5, "Bob", 200.f, gameInstance, fontHandler, textureHandler), deathCallBack(deathCallBack)
 {
 
 
 	this->setCharacterTexture("chick");
-	this->playerSprite.setTexture(getTexture());
-	this->playerSprite.setPosition(position);
-	sf::FloatRect bounds = this->playerSprite.getLocalBounds();
-	playerSprite.setOrigin(bounds.width/2.f, bounds.height/2.f);
-	this->playerSprite.setScale(0.019f, 0.02f);
-	this->setBounds(playerSprite);
+	this->assignTexture();
+	this->setSpriteScale({ 0.019f, 0.02f });
+	this->setSpritePosition({ 25, 525 });
+	this->setSpriteBounds();
+	this->setSpriteOrigin();
+	
 	this->setNameTextPosition({ 0.f, 0.f });
 
 }
 
-Player::Player(const Player& other) : Character(other), score(other.score), playerSprite(other.playerSprite),position(other.position), 
+Player::Player(const Player& other) : Character(other), score(other.score),  
 velocity(other.velocity), jumpHeight(other.jumpHeight), isJumping(other.isJumping), deathCallBack(other.deathCallBack)
 {
 }
@@ -30,15 +31,9 @@ Player::~Player()
 	
 }
 
-void Player::updatePosition(float dTime)
+
+inline void Player::movePlayer(float dTime)
 {
-	
-	
-	this->setBounds(this->playerSprite);
-	this->getWeapon()->setOwnerPosition(this->getPlayerPosition());
-	
-	
-	sf::FloatRect playerArea = this->getBounds();
 	this->velocity.x = 0.f;
 
 
@@ -59,50 +54,63 @@ void Player::updatePosition(float dTime)
 		this->getWeapon()->attack();
 	}
 
-	
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && !isJumping)
 	{
 		this->isJumping = true;
 		velocity.y = -sqrtf(2.0f * 981.f * this->jumpHeight);
-		
+
 
 	}
-	
+	this->decreaseVelocityY(dTime);
+	this->moveCharacterSprite(velocity * dTime);
+}
 
-	this->getWeapon()->updatePosition(dTime);
+inline void Player::decreaseVelocityY(float dTime)
+{
 	this->velocity.y += 981.f * dTime;
-	this->playerSprite.move(velocity * dTime);
+}
+
+
+void Player::updatePosition(float dTime)
+{
+	this->setSpriteBounds();
+	this->getWeapon()->setOwnerPosition(this->getSpritePosition());
+	this->movePlayer(dTime);
+	this->getWeapon()->updatePosition(dTime);
 	this->checkForDeath();
 
 
 }
 
-bool Player::checkCollision(GameObjects& object1)
+void Player::checkCollision(GameObjects& object1)
 {
-	bool collisionMonster = false;
+	
 	sf::FloatRect playerBounds = this->getBounds();
+	sf::Vector2f playerPosition = this->getSpritePosition();
 
-	if (playerSprite.getPosition().x - playerBounds.width/2.f < 0.f)
+	if (playerPosition.x - playerBounds.width / 2.f < 0.f)
 	{
-		playerSprite.setPosition(playerBounds.width/2.f, playerSprite.getPosition().y);
+		this->setSpritePosition({ playerBounds.width / 2.f, playerPosition.y});
 	}
 
-	if (playerSprite.getPosition().x + playerBounds.width/2 > WIDTH)
+	if (playerPosition.x + playerBounds.width/2 > WIDTH)
 	{
-		playerSprite.setPosition(WIDTH - playerBounds.width/2, playerSprite.getPosition().y);
+		this->setSpritePosition({ WIDTH - playerBounds.width / 2, playerPosition.y });
 	}
 
-	if (playerSprite.getPosition().y + playerBounds.height/2 > HEIGHT)
+	if (playerPosition.y + playerBounds.height/2 > HEIGHT)
 	{
 		
-		playerSprite.setPosition(playerSprite.getPosition().x, HEIGHT - playerBounds.height/2);
+		this->setSpritePosition({ playerPosition.x, HEIGHT - playerBounds.height / 2 });
+		
+	}
+
+	if (playerPosition.y / 2.f < 0.f)
+	{
+
+		this->setSpritePosition({playerPosition.x, 0.f});
 		this->isJumping = false;
-	}
-
-	if (playerSprite.getPosition().y/2 < 0.f)
-	{
-		
-		playerSprite.setPosition(playerSprite.getPosition().x, 0.f);
 		
 	}
 
@@ -111,7 +119,7 @@ bool Player::checkCollision(GameObjects& object1)
 
 
 
-	return collisionMonster;
+
 }
 
 void Player::setJumping(bool state)
@@ -124,13 +132,6 @@ void Player::setVelocity(sf::Vector2f newVel)
 	this->velocity = newVel;
 }
 
-void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-	
-	target.draw(this->playerSprite);
-	target.draw(this->getText());
-	this->getWeapon()->callDraw(target, states);
-}
 
 GameObjects* Player::clone()
 {
@@ -148,10 +149,7 @@ string Player::getStats() const
 	return this->getName() + " " + to_string(this->score) + " ";
 }
 
-sf::Sprite* Player::getPlayer()
-{
-	return &this->playerSprite;
-}
+
 
 sf::Vector2f Player::getVelocity() const
 {
@@ -164,10 +162,6 @@ void Player::updateScore()
 	cout << "Player Score: " << this->score << endl;
 }
 
-sf::Vector2f Player::getPlayerPosition() const
-{
-	return this->playerSprite.getPosition();
-}
 
 void Player::checkForDeath()
 {
