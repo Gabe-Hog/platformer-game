@@ -9,7 +9,7 @@
 using namespace std;
 
 /// <summary>
-/// Template Object needs to be on of SFML objects that has loadFromFile() function.
+/// Class object needs to have function loadFromFile().
 /// </summary>
 /// <typeparam name="T"></typeparam>
 template<typename T> 
@@ -21,8 +21,7 @@ private:
 
 
 public:
-	void addAsset(const string searchWord, const string& filePath);
-
+	void addAsset(const string key, const string& filePath);
 	T getAsset(string key) const;
 
 
@@ -33,7 +32,7 @@ public:
 
 
 template<typename T>
-void assetHandler<T>::addAsset(const string searchWord, const string& filePath)
+void assetHandler<T>::addAsset(const string key, const string& filePath)
 {
 	
 	shared_ptr<T> asset = make_shared<T>();
@@ -44,7 +43,7 @@ void assetHandler<T>::addAsset(const string searchWord, const string& filePath)
 	}
 	
 		
-	this->assetContainer.insert({ searchWord, asset });
+	this->assetContainer.insert({ key, asset });
 
 
 }

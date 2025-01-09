@@ -5,7 +5,7 @@ class Timer
 {
 private:
 		sf::Clock* clock = new(sf::Clock);
-		float dTime;
+		float dTime = 0.f;
 		float elapsedTime = 0.f;
 		
 public:

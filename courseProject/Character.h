@@ -3,9 +3,9 @@
 
 #include <string>
 #include "GameObjects.h"
-#include "Movable.h"
 #include "assetHandler.h"
 
+class Player;
 
 using namespace std;
 
@@ -23,8 +23,10 @@ private:
 	Weapon* weapon;
 	Game* gameInstance = nullptr;
 	assetHandler<sf::Font>* fontHandler;
+
 	sf::Text characterText;
 	sf::Font nameFont = fontHandler->getAsset("nameFont");
+
 	assetHandler<sf::Texture>* textureHandler;
 	sf::Sprite characterSprite;
 	sf::Texture characterTexture;
@@ -35,37 +37,50 @@ private:
 
 protected:
 	Game* getGameInstancePointer() const;
-	virtual void checkForDeath() = 0;
 	Weapon* getWeapon() const;
+
 	void moveCharacterSprite(sf::Vector2f offset);
+
+	void setNameTextPosition(sf::Vector2f pos);
+
 	void setSpriteScale(sf::Vector2f newScale);
-	void setSpriteBounds();
 	void setSpriteOrigin();
-
-
-
+	void setCharacterTexture(string keyWord);
+	void setTextureToSprite();
+	sf::Texture& getTexture();
+	
+	void (Game::* onDeathCallBack)(const Player&) = nullptr;
 
 public:
 	Character() = default;
-	Character(Weapon* weapon, int newHealth, string newName, float newMoveSpeed, assetHandler<sf::Font>* fontHandler, assetHandler<sf::Texture>* textureHandler);
-	Character(Weapon* weapon, int newHealth, string newName, float newMoveSpeed, Game* gameInstance, assetHandler<sf::Font>* fontHandler, assetHandler<sf::Texture>* textureHandler);
+	Character(Weapon* weapon, int newHealth, string newName, float newMoveSpeed, Game* gameInstance, void (Game::* onDeathCallBack)(const Player&), assetHandler<sf::Font>* fontHandler, assetHandler<sf::Texture>* textureHandler);
 	Character(const Character& other);
 	virtual ~Character();
-	sf::Vector2f getSpritePosition() const; 
-	void setSpritePosition(sf::Vector2f newPosition);
-	float getMoveSpeed() const;
+
+	
+
 	virtual void updatePosition(float dTime) = 0;
+	
+	virtual void checkForDeath() = 0;
+
+
 	void takeDamage(int damage);
+
+	float getMoveSpeed() const;
+	string characterDataToString() const;
 	int getHealth() const;
-	string getName() const;
-	string characterToString() const;
 	sf::Text getText() const;
-	void setNameTextPosition(sf::Vector2f pos);
+	string getName() const;
+	sf::Vector2f getSpritePosition() const; 
+	sf::FloatRect getSpriteBounds() const;
+
+
+	void setSpritePosition(sf::Vector2f newPosition);
+	
 	void setHealth(int newHealth);
 	void setMoveSpeed(float newMoveSpeed);
-	sf::Texture& getTexture();
-	void setCharacterTexture(string keyWord);
-	void assignTexture();
+
+
 	virtual GameObjects* clone() = 0;
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 

@@ -6,7 +6,7 @@
 class GameObjects : public sf::Drawable
 {
 private:
-	sf::FloatRect bounds;
+	
 
 public:
 
@@ -17,11 +17,6 @@ public:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
 	virtual GameObjects* clone() = 0;
 	
-	void setBounds(sf::Shape& shape);
-	void setBounds(sf::Sprite& sprite);
-	virtual sf::FloatRect getBounds() const;
-
-
 
 
 };

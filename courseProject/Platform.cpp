@@ -2,21 +2,21 @@
 #include "Player.h"
 #include <iostream>
 Platform::Platform(sf::Vector2f pos, sf::Color colour, float width, float height) 
-	: width(width), height(height), platform(sf::Vector2f(width, height))
+	: platform(sf::Vector2f(width, height))
 {
 	this->platform.setFillColor(colour);
 	this->platform.setPosition(pos);
-	this->setBounds(platform);
+
 }
 
-
+ 
 
 Platform::Platform(sf::Vector2f pos, float width, float height) : 
-	width(width), height(height), platform(sf::Vector2f(width, height)), colour(141, 128, 128)
+	platform(sf::Vector2f(width, height)), colour(141, 128, 128)
 {
 	this->platform.setFillColor(colour);
 	this->platform.setPosition(pos);
-	this->setBounds(platform);
+	
 }
 
 
@@ -24,12 +24,17 @@ Platform::~Platform()
 {
 }
 
+sf::FloatRect Platform::getBounds() const
+{
+	return this->platform.getGlobalBounds();
+}
+
 void Platform::checkCollision(GameObjects & object)
 {
 	
 	if(Player* player = dynamic_cast<Player*>(&object))
 	{ 
-		sf::FloatRect playerBounds = player->getBounds(); 
+		sf::FloatRect playerBounds = player->getSpriteBounds(); 
 		sf::FloatRect platformBounds = this->getBounds();
 		
 		if (platformBounds.intersects(playerBounds))

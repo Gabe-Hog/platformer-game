@@ -15,39 +15,48 @@ class MainMenu
 
 private:
 	sf::RenderWindow& window;
+	sf::Sprite mainMenuBackground;
+	sf::Texture mainMenuBackgroundTexture;
 	sf::Vector2f mouseCursorPosition;
 	sf::Font textFont;
 	sf::Text text;
 	sf::Text scoreBoardText;
 	assetHandler<sf::Font>* fontHandler;
+	assetHandler<sf::Texture>* textureHandler;
 	vector<unique_ptr<Button>> menuButtons;
+	
+
+
 	
 	bool play = false;
 	bool programClose= false;
 
-public:
-
-	MainMenu() = default;
-	MainMenu(sf::RenderWindow& window, assetHandler<sf::Font>* handler, string infoText = "Hello World!");
-	~MainMenu();
 	void displayMenu();
-	
-	bool runMenu();
+	void initBackground();
+	void initText();
 	void initButtons();
 	void setPlay(bool newPlay);
-	
+
 	bool returnPlayTrue();
 	bool manageScoreBoard();
 	bool closeProgram();
+
+	vector<string> readScoreBoard();
 	void printTopFiveScore(vector<string> scoreBoard);
 	vector<string> formatScore(vector<string> scoreBoard);
-	void sortScoreBoard(vector<string>& scoreBoardConetent);
-	vector<string> readScoreBoard();
+	static bool sortScoreBoard(const string& toComapreOne, const string& toComapreTwo);
 
-
+	
 	
 
 
+public:
+
+	MainMenu() = default;
+	MainMenu(sf::RenderWindow& window, assetHandler<sf::Font>* fontHandler, assetHandler<sf::Texture>* textureHandler, string infoText = "-The Revenge Of The Chick-");
+	~MainMenu();
+	
+	bool runMenu();
 
 };
 

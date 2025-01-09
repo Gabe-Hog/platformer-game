@@ -5,24 +5,20 @@
 
 
 
-Player::Player(void(Game::*deathCallBack)(const Player&), Game* gameInstance, assetHandler<sf::Font>* fontHandler, assetHandler<sf::Texture>* textureHandler) :
-	Character(new Sword(textureHandler->getAsset("sword")), 5, "Bob", 200.f, gameInstance, fontHandler, textureHandler), deathCallBack(deathCallBack)
+Player::Player(Game* gameInstance, void(Game::* onDeathCallBack)(const Player&), assetHandler<sf::Font>* fontHandler, assetHandler<sf::Texture>* textureHandler):
+	Character(new Sword(textureHandler->getAsset("sword")), 5, "Bob", 200.f, gameInstance, onDeathCallBack, fontHandler, textureHandler)
 {
-
-
 	this->setCharacterTexture("chick");
-	this->assignTexture();
+	this->setTextureToSprite();
 	this->setSpriteScale({ 0.019f, 0.02f });
 	this->setSpritePosition({ 25, 525 });
-	this->setSpriteBounds();
 	this->setSpriteOrigin();
-	
-	this->setNameTextPosition({ 0.f, 0.f });
 
+	this->setNameTextPosition({ 0.f, 0.f });
 }
 
-Player::Player(const Player& other) : Character(other), score(other.score),  
-velocity(other.velocity), jumpHeight(other.jumpHeight), isJumping(other.isJumping), deathCallBack(other.deathCallBack)
+Player::Player(const Player& other) : Character(other), score(other.score),
+velocity(other.velocity), jumpHeight(other.jumpHeight), isJumping(other.isJumping)
 {
 }
 
@@ -74,19 +70,19 @@ inline void Player::decreaseVelocityY(float dTime)
 
 void Player::updatePosition(float dTime)
 {
-	this->setSpriteBounds();
+
 	this->getWeapon()->setOwnerPosition(this->getSpritePosition());
 	this->movePlayer(dTime);
 	this->getWeapon()->updatePosition(dTime);
-	this->checkForDeath();
+	
 
 
 }
 
-void Player::checkCollision(GameObjects& object1)
+void Player::checkCollision(GameObjects& object)
 {
 	
-	sf::FloatRect playerBounds = this->getBounds();
+	sf::FloatRect playerBounds = this->getSpriteBounds();
 	sf::Vector2f playerPosition = this->getSpritePosition();
 
 	if (playerPosition.x - playerBounds.width / 2.f < 0.f)
@@ -114,7 +110,7 @@ void Player::checkCollision(GameObjects& object1)
 		
 	}
 
-	this->getWeapon()->checkCollision(object1);
+	this->getWeapon()->checkCollision(object);
 	
 
 
@@ -159,7 +155,7 @@ sf::Vector2f Player::getVelocity() const
 void Player::updateScore()
 {
 	this->score++;
-	cout << "Player Score: " << this->score << endl;
+	
 }
 
 
@@ -167,8 +163,7 @@ void Player::checkForDeath()
 {
 	if (this->getHealth() <= 0)
 	{
-		
-		(this->getGameInstancePointer()->*deathCallBack)(*this);
+		(this->getGameInstancePointer()->*onDeathCallBack)(*this);
 	}
 
 

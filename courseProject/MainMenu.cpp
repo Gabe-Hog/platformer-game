@@ -2,25 +2,20 @@
 #include <string>
 #include <sstream>
 #include <vector>
-#include <iostream>
 #include <algorithm>
 #include "stdlib.h"
+#include <iostream>
 
 
-MainMenu::MainMenu(sf::RenderWindow& window, assetHandler<sf::Font>* handler, string infoText) : window(window), fontHandler(handler)
+MainMenu::MainMenu(sf::RenderWindow& window, assetHandler<sf::Font>* fontHandler, assetHandler<sf::Texture>* textureHandler, string infoText) :
+	window(window), fontHandler(fontHandler), textureHandler(textureHandler)
 {
-	this->text.setString(infoText);
-	sf::FloatRect textBounds = this->text.getLocalBounds();
-	this->text.setCharacterSize(30);
-	this->text.setFillColor(sf::Color::Red);
 	this->textFont = fontHandler->getAsset("menuFont");
-	this->text.setFont(textFont);
-	this->text.setPosition(this->window.getSize().x / 5.f, this->window.getSize().y / 3.f);
-	this->scoreBoardText.setCharacterSize(20);
-	this->scoreBoardText.setFont(this->textFont);
-	this->scoreBoardText.setLetterSpacing(2);
-	this->scoreBoardText.setPosition(this->window.getSize().x/2.5f, this->window.getSize().y / 3.f);
-	this->scoreBoardText.setFillColor(sf::Color::White);
+	this->text.setString(infoText);
+
+	this->initBackground();
+	this->initText();
+
 	this->initButtons();
 	
 
@@ -35,14 +30,48 @@ MainMenu::~MainMenu()
 void MainMenu::displayMenu()
 {
 	this->window.clear();
+	this->window.draw(this->mainMenuBackground);
 	this->window.draw(text);
 	this->window.draw(scoreBoardText);
+
 	for (int i = 0; i < this->menuButtons.size(); i++)
 	{
 		this->window.draw(*this->menuButtons[i]);
 
 	}
 	this->window.display();
+
+
+}
+
+void MainMenu::initBackground()
+{
+	try 
+	{
+		this->mainMenuBackgroundTexture = this->textureHandler->getAsset("mainMenuBackground");
+		this->mainMenuBackground.setTexture(mainMenuBackgroundTexture);
+	}
+
+	catch (out_of_range e)
+	{
+		cout << e.what() << endl;
+	}
+}
+
+void MainMenu::initText()
+{
+	
+	this->text.setCharacterSize(30);
+	this->text.setFillColor(sf::Color::White);
+	this->text.setFont(textFont);
+	this->text.setPosition(this->window.getSize().x / 3.f, this->window.getSize().y / 3.f);
+
+	this->scoreBoardText.setCharacterSize(20);
+	this->scoreBoardText.setFont(this->textFont);
+	this->scoreBoardText.setLetterSpacing(2);
+	this->scoreBoardText.setPosition(this->window.getSize().x / 2.f, this->window.getSize().y / 2.5f);
+	this->scoreBoardText.setFillColor(sf::Color::White);
+
 
 
 }
@@ -72,8 +101,8 @@ bool MainMenu::runMenu()
 			
 			}
 		}
-
-		
+		for (auto& button : menuButtons)
+			button->onHover(this->mouseCursorPosition);
 	}
 
 	return true;
@@ -87,7 +116,7 @@ void MainMenu::initButtons()
 	this->menuButtons.push_back(make_unique<Button>(&MainMenu::manageScoreBoard, *this, this->textFont,
 		sf::Vector2f(this->window.getSize().x / 5.f, this->window.getSize().y / 2.5f+ 30.f), "Show ScoreBoard"));
 	this->menuButtons.push_back(make_unique<Button>(&MainMenu::closeProgram, *this, this->textFont,
-		sf::Vector2f(this->window.getSize().x / 5.f, this->window.getSize().y / 2.5f+ 60.f)));
+		sf::Vector2f(this->window.getSize().x / 5.f, this->window.getSize().y / 2.5f+ 60.f), "Exit"));
 
 }
 
@@ -106,12 +135,14 @@ bool MainMenu::returnPlayTrue()
 
 bool MainMenu::manageScoreBoard()
 {
+	bool didPrintScoreBoard = false;
 	try
 	{
 		vector<string> lines = readScoreBoard();
-		sortScoreBoard(lines);
+		sort(lines.begin(), lines.end(), sortScoreBoard);
 		lines = formatScore(lines);
 		printTopFiveScore(lines);
+		didPrintScoreBoard = true;
 	}
 	catch (runtime_error e)
 	{
@@ -119,7 +150,7 @@ bool MainMenu::manageScoreBoard()
 	}
 
 
-	return true;
+	return didPrintScoreBoard;
 }
 
 bool MainMenu::closeProgram()
@@ -157,31 +188,26 @@ vector<string> MainMenu::formatScore(vector<string> scoreBoard)
 	return formated;
 }
 
-void MainMenu::sortScoreBoard(vector<string>& scoreBoardContent)
+bool MainMenu::sortScoreBoard(const string& toCompareOne, const string& toCompareTwo)
 {
 
-	for (int i = 0; i < scoreBoardContent.size(); i++)
-	{
 
-		istringstream splitStream(scoreBoardContent[i]);
-		string name;
-		int score;
-		float time;
-		splitStream >> name >> score >> time;
-		for (int j = 0; j < scoreBoardContent.size(); j++)
-		{
-			istringstream splitStream2(scoreBoardContent[j]);
-			string name2;
-			int score2;
-			float time2;
-			splitStream2 >> name2 >> score2 >> time2;
-			string temp;
-			if (score > score2 || (score == score2 && time < time2)) 
-			{ std::swap(scoreBoardContent[i], scoreBoardContent[j]); }
-		}
+		istringstream splitStream(toCompareOne);
+		istringstream splitStream2(toCompareTwo);
 
-	}
+		string nameOne, nameTwo;
+		int scoreOne, scoreTwo;
+		float timeOne, timeTwo;
+
+
+		splitStream >> nameOne >> scoreOne >> timeOne;
+		splitStream2 >> nameTwo >> scoreTwo >> timeTwo;
+
+
+		if (scoreOne == scoreTwo)
+			return timeOne < timeTwo;
 	
+		return scoreOne > scoreTwo;
 
 }
 

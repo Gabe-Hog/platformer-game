@@ -13,16 +13,21 @@ class Weapon : public GameObjects
 private:
 
 	int damage = 1;
+	float speed;
 	bool didHit = false;
 	sf::Vector2f ownerPosition;
-
+	 
+protected:
+	float getSpeed() const;
+	int getDamage() const;
+	void dealDamage(Character& character) const;
 public:
 
 	Weapon() = default;
-	Weapon(int damage);
+	Weapon(float speed);
+	Weapon(int damage, float speed = 6.f);
 	Weapon(const Weapon&) = default;
 	virtual ~Weapon() = default;
-	virtual void callDraw(sf::RenderTarget& target, sf::RenderStates states) = 0;
 	virtual void attack(sf::Vector2f targetDirection = {0.f,0.f}) = 0;
 	virtual void updatePosition(float dTime) = 0;
 	void setDidHit(bool hit);
@@ -30,7 +35,7 @@ public:
 	void setOwnerPosition(sf::Vector2f newOwnerPosition);
 	sf::Vector2f getOwnerPosition() const;
 	virtual Weapon* clone() = 0;
-	void dealDamage(Character& character) const;
+	
 
 };
 #endif

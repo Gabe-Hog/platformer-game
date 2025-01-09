@@ -2,7 +2,11 @@
 #include "Character.h"
 
 
-Weapon::Weapon(int damage) : damage(damage)
+Weapon::Weapon(float speed) : speed(speed)
+{
+}
+
+Weapon::Weapon(int damage, float speed) : damage(damage), speed(speed)
 {
 }
 
@@ -27,6 +31,17 @@ void Weapon::dealDamage(Character& character) const
 {
 	character.takeDamage(this->damage);
 }
+
+float Weapon::getSpeed() const
+{
+	return this->speed;
+}
+
+int Weapon::getDamage() const
+{
+	return this->damage;
+}
+
 
 void Weapon::setDidHit(bool hit)
 {

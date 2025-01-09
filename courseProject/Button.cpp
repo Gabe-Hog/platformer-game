@@ -12,8 +12,20 @@ Button::Button(bool (MainMenu::*onPressCallBack)(), MainMenu& menu, sf::Font& fo
 	this->buttonText.setCharacterSize(18);
 	this->buttonText.setString(buttonText);
 	
-	this->buttonText.setFillColor(sf::Color::Red);
+	this->buttonText.setFillColor(sf::Color::White);
 	
+}
+
+void Button::onHover(sf::Vector2f& mouseCursor)
+{
+	sf::FloatRect buttonBounds = this->buttonText.getGlobalBounds();
+	if (buttonBounds.contains(mouseCursor))
+	{
+		this->buttonText.setFillColor(sf::Color::Black);
+	}
+	else {
+		this->buttonText.setFillColor(sf::Color::White);
+	}
 }
 
 void Button::checkForButtonPress(sf::Vector2f& mouseCursor, sf::Event& e)
@@ -22,7 +34,7 @@ void Button::checkForButtonPress(sf::Vector2f& mouseCursor, sf::Event& e)
 	
 	if (buttonBounds.contains(mouseCursor)) 
 	{
-		this->buttonText.setFillColor(sf::Color::Green);
+		
 		(this->menu.*onPressCallBack)();
 			
 	}

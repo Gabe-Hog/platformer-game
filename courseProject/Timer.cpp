@@ -1,5 +1,5 @@
 #include "Timer.h"
-
+#include <math.h>
 Timer::~Timer()
 {
     delete this->clock;
@@ -18,7 +18,7 @@ float Timer::getDeltaTime() const
 
 float Timer::getTimerElapsedTime() const
 {
-    return this->elapsedTime;
+    return round(this->elapsedTime*100.0)/100.0;
 }
 
 void Timer::setDeltaTime()

@@ -3,7 +3,6 @@
 #include "Platform.h"
 #include "Character.h"
 #include "Timer.h"
-
 #include <iostream>
 
 
@@ -12,6 +11,7 @@
 Game::Game() : window(sf::VideoMode(WIDTH, HEIGHT), "Revenge Of The Chick")
 {
 	window.setFramerateLimit(60);
+	
 	try
 	{
 		this->fontHandler->addAsset("menuFont", "fonts/Branda-yolq.ttf");
@@ -19,6 +19,7 @@ Game::Game() : window(sf::VideoMode(WIDTH, HEIGHT), "Revenge Of The Chick")
 		this->textureHandler->addAsset("chick", "textures/chicken.png");
 		this->textureHandler->addAsset("sword", "textures/chickStick.png");
 		this->textureHandler->addAsset("enemyOven", "textures/evilOven1.png");
+		this->textureHandler->addAsset("mainMenuBackground", "textures/mainMenuBackGround.jpg");
 	}
 	catch(runtime_error e)
 	{
@@ -36,8 +37,6 @@ Game::Game(const Game& other) :
 		objects.push_back(objects[i]->clone());
 	}
 
-
-
 }
 
 Game::~Game()
@@ -49,7 +48,6 @@ Game::~Game()
 
 	delete this->textureHandler;
 	delete this->fontHandler;
-	
 
 }
 
@@ -74,47 +72,17 @@ void Game::update(float dTime)
 
 }
 
-void Game::render()
-{
-	this->window.clear();
-	
-	for (int i = 0; i < objects.size(); i++)
-	{
-		this->window.draw(*this->objects[i]);
-		
-	}
-	this->window.display();
-}
-
-void Game::initGameObjects()
-{
-	sf::Font characterTextFont = this->fontHandler->getAsset("menuFont");
-	Player* yourPlayer = new Player(&Game::endRound, this, this->fontHandler, this->textureHandler);
-
-
-	this->addObject(yourPlayer);
-	this->addObject(new Monster(*yourPlayer, updatePlayersScore, this->fontHandler, this->textureHandler));
-	this->addObject(new Platform(sf::Vector2f(100, 500), 200.f, 20.f));
-	this->addObject(new Platform(sf::Vector2f(400, 400), 100.f, 20.f));
-	this->addObject(new Platform(sf::Vector2f(150, 250), 150.f, 20.f));
-	this->addObject(new Platform(sf::Vector2f(450, 170), 70.f, 20.f));
-	this->addObject(new Platform(sf::Vector2f(0, HEIGHT-1.f), sf::Color::Transparent, WIDTH, 1.f));
-	
-}
-
-
 
 void Game::run()
 {
-	MainMenu menu(this->window,this->fontHandler);
+	MainMenu menu(this->window, this->fontHandler, this->textureHandler);
+
 	if (!menu.runMenu())
 	{
 		return;
 	}
-	roundEnded = false;
+	this->prepareGame();
 	
-	initGameObjects();
-	this->timer.getClock()->restart();
 
 	while (this->window.isOpen())
 	{
@@ -126,13 +94,65 @@ void Game::run()
 		eventHandle();
 		update(dTime);
 		render();
-		
-		
 		this->timer.addToElapsedTime(this->timer.getClock()->getElapsedTime().asSeconds());
 	}
 	if(this->roundEnded)
 		run();
 }
+
+void Game::render()
+{
+	this->window.clear();
+	this->window.draw(this->windowBackground);
+	for (int i = 0; i < objects.size(); i++)
+	{
+		this->window.draw(*this->objects[i]);
+
+	}
+	this->window.display();
+}
+
+void Game::initGameObjects()
+{
+	
+	Player* yourPlayer = new Player(this, &Game::endRound, this->fontHandler, this->textureHandler);
+
+
+	this->addObject(yourPlayer);
+	this->addObject(new Enemy(*yourPlayer, this, &Game::updatePlayersScore, this->fontHandler, this->textureHandler));
+	
+	
+	
+	this->addObject(new Platform(sf::Vector2f(100, 500), 200.f, 20.f));
+	this->addObject(new Platform(sf::Vector2f(400, 400), 100.f, 20.f));
+	this->addObject(new Platform(sf::Vector2f(150, 250), 150.f, 20.f));
+	this->addObject(new Platform(sf::Vector2f(450, 170), 70.f, 20.f));
+	this->addObject(new Platform(sf::Vector2f(0, HEIGHT - 1.f), sf::Color::Transparent, WIDTH, 1.f));
+
+}
+
+void Game::initBackground()
+{
+	try
+	{
+		this->windowBackgroundTexture = this->textureHandler->getAsset("gameBackground");
+		this->windowBackground.setTexture(this->windowBackgroundTexture);
+	}
+
+	catch (out_of_range e)
+	{
+		cout << e.what() << endl;
+	}
+}
+
+void Game::prepareGame()
+{
+	initGameObjects();
+
+	this->timer.getClock()->restart();
+	this->roundEnded = false;
+}
+
 
 bool Game::addObject(GameObjects* aObject)
 {
@@ -153,7 +173,9 @@ void Game::updateObjectPosition(float dTime)
 		Character* pCharacter = dynamic_cast<Character*>(this->objects[i]);
 		if (pCharacter != nullptr)
 		{
+			
 			pCharacter->updatePosition(dTime);
+			pCharacter->checkForDeath();
 		}
 	}
 
@@ -172,6 +194,8 @@ void Game::makeCollisionCheck()
 		}
 	}
 }
+
+
 
 void Game::updatePlayersScore(const Player& player)
 {

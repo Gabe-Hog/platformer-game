@@ -145,8 +145,8 @@
     <ClCompile Include="GameObjects.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
-    <ClCompile Include="Monster.cpp" />
-    <ClCompile Include="Movable.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="DirectionVectorProcessor.cpp" />
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projectile.cpp" />
@@ -164,8 +164,8 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObjects.h" />
     <ClInclude Include="MainMenu.h" />
-    <ClInclude Include="Monster.h" />
-    <ClInclude Include="Movable.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="DirectionVectorProcessor.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Projectile.h" />
