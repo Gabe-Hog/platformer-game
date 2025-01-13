@@ -57,9 +57,10 @@ void Enemy::checkForDeath()
     
     if (this->getHealth() <= 0)
     {
-        (this->getGameInstancePointer()->*onDeathCallBack)(this->target);
+        this->invokeOnDeath(this->target);
         this->updateDifficulty();
         this->setSpritePosition({ 850, 550 });
+
        
     }
 

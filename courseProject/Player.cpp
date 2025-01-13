@@ -163,7 +163,7 @@ void Player::checkForDeath()
 {
 	if (this->getHealth() <= 0)
 	{
-		(this->getGameInstancePointer()->*onDeathCallBack)(*this);
+		this->invokeOnDeath(*this);
 	}
 
 

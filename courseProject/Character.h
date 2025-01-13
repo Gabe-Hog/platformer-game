@@ -30,13 +30,14 @@ private:
 	assetHandler<sf::Texture>* textureHandler;
 	sf::Sprite characterSprite;
 	sf::Texture characterTexture;
+	void (Game::* onDeathCallBack)(const Player&) = nullptr;
 
 
 	
 
 
 protected:
-	Game* getGameInstancePointer() const;
+	void invokeOnDeath(const Player& player);
 	Weapon* getWeapon() const;
 
 	void moveCharacterSprite(sf::Vector2f offset);
@@ -49,7 +50,7 @@ protected:
 	void setTextureToSprite();
 	sf::Texture& getTexture();
 	
-	void (Game::* onDeathCallBack)(const Player&) = nullptr;
+	
 
 public:
 	Character() = default;

@@ -20,6 +20,7 @@ Game::Game() : window(sf::VideoMode(WIDTH, HEIGHT), "Revenge Of The Chick")
 		this->textureHandler->addAsset("sword", "textures/chickStick.png");
 		this->textureHandler->addAsset("enemyOven", "textures/evilOven1.png");
 		this->textureHandler->addAsset("mainMenuBackground", "textures/mainMenuBackGround.jpg");
+		this->textureHandler->addAsset("gameBackground", "textures/gameBackground.jpg");
 	}
 	catch(runtime_error e)
 	{
@@ -148,7 +149,7 @@ void Game::initBackground()
 void Game::prepareGame()
 {
 	initGameObjects();
-
+	initBackground();
 	this->timer.getClock()->restart();
 	this->roundEnded = false;
 }

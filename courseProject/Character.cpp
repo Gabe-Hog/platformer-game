@@ -40,9 +40,11 @@ float Character::getMoveSpeed() const
 	return this->moveSpeed;
 }
 
-Game* Character::getGameInstancePointer() const
+
+
+void Character::invokeOnDeath(const Player& player)
 {
-	return this->gameInstance;
+	(this->gameInstance->*onDeathCallBack)(player);
 }
 
 Weapon* Character::getWeapon() const
@@ -86,6 +88,7 @@ void Character::setSpritePosition(sf::Vector2f newPosition)
 
 
 
+
 void Character::takeDamage(int damage)
 {
 	
@@ -123,6 +126,7 @@ sf::Text Character::getText() const
 void Character::setHealth(int newHealth)
 {
 	this->health = newHealth;
+	this->characterText.setString(this->characterDataToString());
 }
 
 void Character::setMoveSpeed(float newMoveSpeed)

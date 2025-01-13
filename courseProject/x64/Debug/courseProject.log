@@ -1,4 +1,14 @@
-﻿  MainMenu.cpp
-  Player.cpp
+﻿  Character.cpp
+  Enemy.cpp
+C:\Users\gabri\source\repos\platformer-game\courseProject\Enemy.cpp(102,34): warning C4244: '=': conversion from 'int' to 'T', possible loss of data
+C:\Users\gabri\source\repos\platformer-game\courseProject\Enemy.cpp(102,34): warning C4244:         with
+C:\Users\gabri\source\repos\platformer-game\courseProject\Enemy.cpp(102,34): warning C4244:         [
+C:\Users\gabri\source\repos\platformer-game\courseProject\Enemy.cpp(102,34): warning C4244:             T=float
+C:\Users\gabri\source\repos\platformer-game\courseProject\Enemy.cpp(102,34): warning C4244:         ]
+C:\Users\gabri\source\repos\platformer-game\courseProject\Enemy.cpp(103,34): warning C4244: '=': conversion from 'int' to 'T', possible loss of data
+C:\Users\gabri\source\repos\platformer-game\courseProject\Enemy.cpp(103,34): warning C4244:         with
+C:\Users\gabri\source\repos\platformer-game\courseProject\Enemy.cpp(103,34): warning C4244:         [
+C:\Users\gabri\source\repos\platformer-game\courseProject\Enemy.cpp(103,34): warning C4244:             T=float
+C:\Users\gabri\source\repos\platformer-game\courseProject\Enemy.cpp(103,34): warning C4244:         ]
   Generating Code...
   courseProject.vcxproj -> C:\Users\gabri\Source\Repos\platformer-game\x64\Debug\courseProject.exe

@@ -64,12 +64,12 @@ void MainMenu::initText()
 	this->text.setCharacterSize(30);
 	this->text.setFillColor(sf::Color::White);
 	this->text.setFont(textFont);
-	this->text.setPosition(this->window.getSize().x / 3.f, this->window.getSize().y / 3.f);
+	this->text.setPosition(this->window.getSize().x / 5.f, this->window.getSize().y / 3.f);
 
 	this->scoreBoardText.setCharacterSize(20);
 	this->scoreBoardText.setFont(this->textFont);
 	this->scoreBoardText.setLetterSpacing(2);
-	this->scoreBoardText.setPosition(this->window.getSize().x / 2.f, this->window.getSize().y / 2.5f);
+	this->scoreBoardText.setPosition(this->window.getSize().x / 2.5f, this->window.getSize().y / 2.5f);
 	this->scoreBoardText.setFillColor(sf::Color::White);
 
 
