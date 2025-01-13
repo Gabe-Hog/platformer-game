@@ -22,12 +22,6 @@ Projectile::Projectile(const Projectile& other) : Weapon(other), isMoving(other.
 }
 
 
-
-
-
-
-
-
 void Projectile::attack(sf::Vector2f targetDirection)
 {
     sf::Vector2f test = this->getOwnerPosition();
@@ -110,10 +104,6 @@ void Projectile::draw(sf::RenderTarget& target, sf::RenderStates states) const
     }
 }
 
-Weapon* Projectile::clone()
-{
-    return new Projectile(*this);
-}
 
 bool Projectile::outOfBounds() const
 {

@@ -26,15 +26,15 @@ public:
 	Weapon() = default;
 	Weapon(float speed);
 	Weapon(int damage, float speed = 6.f);
-	Weapon(const Weapon&) = default;
 	virtual ~Weapon() = default;
 	virtual void attack(sf::Vector2f targetDirection = {0.f,0.f}) = 0;
-	virtual void updatePosition(float dTime) = 0;
 	void setDidHit(bool hit);
 	bool hit() const;
 	void setOwnerPosition(sf::Vector2f newOwnerPosition);
 	sf::Vector2f getOwnerPosition() const;
-	virtual Weapon* clone() = 0;
+	virtual void checkCollision(GameObjects& object) = 0;
+	virtual void updatePosition(float dTime) = 0;
+	
 	
 
 };

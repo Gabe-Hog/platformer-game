@@ -17,11 +17,6 @@ Player::Player(Game* gameInstance, void(Game::* onDeathCallBack)(const Player&),
 	this->setNameTextPosition({ 0.f, 0.f });
 }
 
-Player::Player(const Player& other) : Character(other), score(other.score),
-velocity(other.velocity), jumpHeight(other.jumpHeight), isJumping(other.isJumping)
-{
-}
-
 Player::~Player()
 {
 	
@@ -128,11 +123,6 @@ void Player::setVelocity(sf::Vector2f newVel)
 	this->velocity = newVel;
 }
 
-
-GameObjects* Player::clone()
-{
-	return new Player(*this);
-}
 
 
 int Player::getScore() const

@@ -19,12 +19,7 @@ Character::Character(Weapon* weapon, int newHealth, string newName, float newMov
 	this->characterText.setFont(this->nameFont);
 }
 
-Character::Character(const Character& other) : 
-	weapon(other.weapon->clone()), health(other.health), name(other.name), moveSpeed(other.moveSpeed), fontHandler(other.fontHandler), 
-	textureHandler(other.textureHandler), gameInstance(other.gameInstance), characterText(other.characterText), nameFont(other.nameFont), 
-	characterSprite(other.characterSprite), characterTexture(other.characterTexture)
-{
-}
+
 
 
 

@@ -20,9 +20,7 @@ Enemy::Enemy(const Player& player, Game* gameInstance, void(Game::*onDeathCallBa
     this->setNameTextPosition({ WIDTH - 100.f, 0.f });
 }
 
-Enemy::Enemy(const Enemy& other) : Character(other), attackSpeed(other.attackSpeed), randomPosition(other.randomPosition), target(other.target)
-{
-}
+
 
 Enemy::~Enemy()
 {
@@ -68,11 +66,6 @@ void Enemy::checkForDeath()
 
 
 
-
-GameObjects* Enemy::clone()
-{
-    return new Enemy(*this);
-}
 
 
 void Enemy::setAttackSpeed(float newAttackSpeed)

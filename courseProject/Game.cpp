@@ -29,16 +29,6 @@ Game::Game() : window(sf::VideoMode(WIDTH, HEIGHT), "Revenge Of The Chick")
 
 }
 
-Game::Game(const Game& other) :
-	timer(other.timer), fontHandler(new assetHandler<sf::Font>(*other.fontHandler)),
-	textureHandler(new assetHandler<sf::Texture>(*other.textureHandler)), roundEnded(other.roundEnded)
-{
-	for(int i = 0; other.objects.size(); i++)
-	{
-		objects.push_back(objects[i]->clone());
-	}
-
-}
 
 Game::~Game()
 {

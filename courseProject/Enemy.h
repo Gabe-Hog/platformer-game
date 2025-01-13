@@ -31,13 +31,12 @@ public:
 
 	Enemy() = default;
 	Enemy(const Player& player, Game* gameInstance, void(Game::* onDeathCallBack)(const Player&), assetHandler<sf::Font>* fontHandler, assetHandler<sf::Texture>* textureHandler);
-	Enemy(const Enemy& other);
 	~Enemy();
 
 	void setAttackSpeed(float newAttackSpeed);
 	
 	void checkCollision(GameObjects& object1) override;
-	virtual GameObjects* clone() override;
+
 
 
 

@@ -1,8 +1,5 @@
 #include "DirectionVectorProcessor.h"
 
-DirectionVectorProcessor::~DirectionVectorProcessor()
-{
-}
 
 void DirectionVectorProcessor::setDirection(sf::Vector2f newDirection)
 {

@@ -54,8 +54,8 @@ protected:
 
 public:
 	Character() = default;
-	Character(Weapon* weapon, int newHealth, string newName, float newMoveSpeed, Game* gameInstance, void (Game::* onDeathCallBack)(const Player&), assetHandler<sf::Font>* fontHandler, assetHandler<sf::Texture>* textureHandler);
-	Character(const Character& other);
+	Character(Weapon* weapon, int newHealth, string newName, float newMoveSpeed, Game* gameInstance, void (Game::* onDeathCallBack)(const Player&), 
+				assetHandler<sf::Font>* fontHandler, assetHandler<sf::Texture>* textureHandler);
 	virtual ~Character();
 
 	
@@ -82,7 +82,7 @@ public:
 	void setMoveSpeed(float newMoveSpeed);
 
 
-	virtual GameObjects* clone() = 0;
+
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 };

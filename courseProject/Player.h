@@ -25,7 +25,7 @@ public:
 
 	Player() = default;
 	Player(Game* gameInstance, void(Game::*onDeathCallBack)(const Player&), assetHandler<sf::Font>* fontHandler, assetHandler<sf::Texture>* textureHandler);
-	Player(const Player& other);
+
 	~Player();
 	
 	int getScore() const;
@@ -40,8 +40,7 @@ public:
 	void updatePosition(float dTime) override;
 	void checkCollision(GameObjects & object1) override;
 	
-	virtual GameObjects* clone() override;
-	
+
 
 
 };

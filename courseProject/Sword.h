@@ -24,7 +24,7 @@ public:
 	void checkCollision(GameObjects& object1) override;
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-	virtual Weapon* clone() override;
+
 
 
 

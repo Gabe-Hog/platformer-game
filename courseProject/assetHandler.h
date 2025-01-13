@@ -21,6 +21,8 @@ private:
 
 
 public:
+	assetHandler() = default;
+	~assetHandler() = default;
 	void addAsset(const string key, const string& filePath);
 	T getAsset(string key) const;
 

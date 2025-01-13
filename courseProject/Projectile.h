@@ -24,12 +24,12 @@ public:
 	~Projectile() = default;
 	void attack(sf::Vector2f targetPosition) override;
 	void updatePosition(float dTime) override;
-	void checkCollision(GameObjects& object1) override;
+	void checkCollision(GameObjects& object) override;
 	
 
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-	virtual Weapon* clone() override;
+	
 	
 	vector<shared_ptr<Projectile>> getProjectiles() const;
 

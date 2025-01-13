@@ -66,9 +66,4 @@ void Platform::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	target.draw(this->platform);
 }
 
-GameObjects* Platform::clone()
-{
-	return new Platform(*this);
-}
-
 

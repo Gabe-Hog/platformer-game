@@ -42,7 +42,6 @@ private:
 public:
 	
 	Game();
-	Game(const Game& other);
 	~Game();
 	void run();
 	bool addObject(GameObjects* aObject);

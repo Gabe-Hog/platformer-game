@@ -70,7 +70,4 @@ void Sword::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	}
 }
 
-Weapon* Sword::clone()
-{
-	return new Sword(*this);
-}
+

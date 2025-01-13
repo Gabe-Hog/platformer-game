@@ -11,10 +11,6 @@ Weapon::Weapon(int damage, float speed) : damage(damage), speed(speed)
 }
 
 
-
-
-
-
 void Weapon::setOwnerPosition(sf::Vector2f newOwnerPosition)
 {
 	this->ownerPosition = newOwnerPosition;

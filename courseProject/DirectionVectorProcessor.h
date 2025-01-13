@@ -9,11 +9,11 @@ private:
 	sf::Vector2f direction;
 	float normalize(sf::Vector2f direction);
 
-public:
+protected:
 
 	DirectionVectorProcessor() = default;
 	DirectionVectorProcessor(DirectionVectorProcessor&) = default;
-	~DirectionVectorProcessor();
+	~DirectionVectorProcessor() = default;
 	void setDirection(sf::Vector2f newDirection);
 	sf::Vector2f getNormalizedDirection();
 	
