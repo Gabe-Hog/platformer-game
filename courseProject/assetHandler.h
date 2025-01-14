@@ -27,8 +27,6 @@ public:
 	T getAsset(string key) const;
 
 
-
-
 };
 
 

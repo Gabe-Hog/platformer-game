@@ -1,7 +1,6 @@
 #include "Enemy.h"
 #include <cstdlib>
 #include <ctime>
-#include <iostream>
 #include <math.h>
 #include <utility>
 #include "Game.h"
@@ -44,9 +43,6 @@ void Enemy::checkCollision(GameObjects& object)
     }
 
     this->getWeapon()->checkCollision(object);
-
-
- 
 }
 
 
@@ -58,10 +54,7 @@ void Enemy::checkForDeath()
         this->invokeOnDeath(this->target);
         this->updateDifficulty();
         this->setSpritePosition({ 850, 550 });
-
-       
     }
-
 }
 
 
@@ -101,15 +94,12 @@ inline void Enemy::moveEnemy(float dTime, float &timeInterval)
 
     this->getWeapon()->updatePosition(dTime);
     this->moveCharacterSprite(getNormalizedDirection() * this->getMoveSpeed() * dTime);
-
 }
 
 
 
 void Enemy::updatePosition(float dTime)
-{
-    
-   
+{  
     this->getWeapon()->setOwnerPosition(this->getSpritePosition());
     
     sf::Vector2f targetPosition = this->target.getSpritePosition();
@@ -118,8 +108,6 @@ void Enemy::updatePosition(float dTime)
 
     this->makeAttackCheck(timeAccumulator, targetPosition);
     this->moveEnemy(dTime, timeAccumulator);
-   
-   
 }
 
 void Enemy::updateDifficulty()
@@ -138,7 +126,5 @@ void Enemy::updateDifficulty()
     {
         this->setAttackSpeed(this->attackSpeed - 1);
     }
-    
-   
 }
 

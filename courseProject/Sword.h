@@ -8,7 +8,6 @@ class Sword : public Weapon
 {
 private:
 
-	
 	bool isSwinging = false;
 
 	sf::Sprite swordSprite;
@@ -24,9 +23,5 @@ public:
 	void checkCollision(GameObjects& object1) override;
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-
-
-
-
 };
 #endif

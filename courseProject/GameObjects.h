@@ -13,6 +13,7 @@ public:
 	GameObjects() = default;
 	GameObjects(const GameObjects&) = default;
 	virtual ~GameObjects() = default;
+
 	virtual void checkCollision(GameObjects& object1) = 0;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
 

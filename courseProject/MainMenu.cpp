@@ -17,9 +17,6 @@ MainMenu::MainMenu(sf::RenderWindow& window, assetHandler<sf::Font>* fontHandler
 	this->initText();
 
 	this->initButtons();
-	
-
-	
 }
 
 MainMenu::~MainMenu()
@@ -40,8 +37,6 @@ void MainMenu::displayMenu()
 
 	}
 	this->window.display();
-
-
 }
 
 void MainMenu::initBackground()
@@ -60,7 +55,6 @@ void MainMenu::initBackground()
 
 void MainMenu::initText()
 {
-	
 	this->text.setCharacterSize(30);
 	this->text.setFillColor(sf::Color::White);
 	this->text.setFont(textFont);
@@ -71,9 +65,6 @@ void MainMenu::initText()
 	this->scoreBoardText.setLetterSpacing(2);
 	this->scoreBoardText.setPosition(this->window.getSize().x / 2.5f, this->window.getSize().y / 2.5f);
 	this->scoreBoardText.setFillColor(sf::Color::White);
-
-
-
 }
 
 
@@ -98,7 +89,6 @@ bool MainMenu::runMenu()
 				{
 					menuButtons[i]->checkForButtonPress(this->mouseCursorPosition, e);
 				}
-			
 			}
 		}
 		for (auto& button : menuButtons)
@@ -106,7 +96,6 @@ bool MainMenu::runMenu()
 	}
 
 	return true;
-
 }
 
 void MainMenu::initButtons() 
@@ -117,12 +106,10 @@ void MainMenu::initButtons()
 		sf::Vector2f(this->window.getSize().x / 5.f, this->window.getSize().y / 2.5f+ 30.f), "Show ScoreBoard"));
 	this->menuButtons.push_back(make_unique<Button>(&MainMenu::closeProgram, *this, this->textFont,
 		sf::Vector2f(this->window.getSize().x / 5.f, this->window.getSize().y / 2.5f+ 60.f), "Exit"));
-
 }
 
 void MainMenu::setPlay(bool newPlay)
 {
-
 	this->play = newPlay;
 }
 
@@ -149,13 +136,11 @@ bool MainMenu::manageScoreBoard()
 		this->scoreBoardText.setString(e.what());
 	}
 
-
 	return didPrintScoreBoard;
 }
 
 bool MainMenu::closeProgram()
 {
-
 	this->programClose = true;
 	this->window.close();
 	return true;
@@ -190,8 +175,6 @@ vector<string> MainMenu::formatScore(vector<string> scoreBoard)
 
 bool MainMenu::sortScoreBoard(const string& toCompareOne, const string& toCompareTwo)
 {
-
-
 		istringstream splitStream(toCompareOne);
 		istringstream splitStream2(toCompareTwo);
 
@@ -208,7 +191,6 @@ bool MainMenu::sortScoreBoard(const string& toCompareOne, const string& toCompar
 			return timeOne < timeTwo;
 	
 		return scoreOne > scoreTwo;
-
 }
 
 

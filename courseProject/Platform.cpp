@@ -6,7 +6,6 @@ Platform::Platform(sf::Vector2f pos, sf::Color colour, float width, float height
 {
 	this->platform.setFillColor(colour);
 	this->platform.setPosition(pos);
-
 }
 
  
@@ -16,12 +15,6 @@ Platform::Platform(sf::Vector2f pos, float width, float height) :
 {
 	this->platform.setFillColor(colour);
 	this->platform.setPosition(pos);
-	
-}
-
-
-Platform::~Platform()
-{
 }
 
 sf::FloatRect Platform::getBounds() const
@@ -44,8 +37,6 @@ void Platform::checkCollision(GameObjects & object)
 				player->setVelocity({ 0,0 });
 				player->setSpritePosition({ player->getSpritePosition().x, platformBounds.top - playerBounds.height/2.f});
 				player->setJumping(false);
-				
-
 			}
 		}
 		
@@ -53,12 +44,7 @@ void Platform::checkCollision(GameObjects & object)
 		{
 			player->setJumping(true);
 		}
-
-
 	}
-
-
-	
 }
 
 void Platform::draw(sf::RenderTarget& target, sf::RenderStates states) const

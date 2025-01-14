@@ -37,19 +37,20 @@ private:
 
 
 protected:
+
 	void invokeOnDeath(const Player& player);
 	Weapon* getWeapon() const;
-
 	void moveCharacterSprite(sf::Vector2f offset);
 
 	void setNameTextPosition(sf::Vector2f pos);
-
 	void setSpriteScale(sf::Vector2f newScale);
 	void setSpriteOrigin();
 	void setCharacterTexture(string keyWord);
 	void setTextureToSprite();
+
 	sf::Texture& getTexture();
-	
+
+	string characterDataToString() const;
 	
 
 public:
@@ -58,17 +59,13 @@ public:
 				assetHandler<sf::Font>* fontHandler, assetHandler<sf::Texture>* textureHandler);
 	virtual ~Character();
 
-	
-
-	virtual void updatePosition(float dTime) = 0;
-	
-	virtual void checkForDeath() = 0;
-
-
 	void takeDamage(int damage);
 
+	
+
+
+
 	float getMoveSpeed() const;
-	string characterDataToString() const;
 	int getHealth() const;
 	sf::Text getText() const;
 	string getName() const;
@@ -77,11 +74,12 @@ public:
 
 
 	void setSpritePosition(sf::Vector2f newPosition);
-	
 	void setHealth(int newHealth);
 	void setMoveSpeed(float newMoveSpeed);
+	
 
-
+	virtual void updatePosition(float dTime) = 0;
+	virtual void checkForDeath() = 0;
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
