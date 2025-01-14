@@ -33,6 +33,9 @@ bld/
 
 # Visual Studio directories and temporary files
 .vs/
+.vs/courseProject/v17/.suo
+.vs/courseProject/v17/DocumentLayout.backup.json
+.vs/courseProject/v17/DocumentLayout.json
 .vscode/
 *.vcxproj.user
 *.sdf
