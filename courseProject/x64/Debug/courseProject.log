@@ -13,13 +13,10 @@ C:\Users\gabri\source\repos\courseProject\courseProject\Enemy.cpp(89,34): warnin
   Game.cpp
 C:\Users\gabri\source\repos\courseProject\courseProject\Game.cpp(11,44): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
 C:\Users\gabri\source\repos\courseProject\courseProject\Game.cpp(11,37): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-  GameObjects.cpp
-  MainMenu.cpp
   Platform.cpp
   Player.cpp
   Projectile.cpp
   Sword.cpp
-  Weapon.cpp
   main.cpp
 C:\Users\gabri\source\repos\courseProject\courseProject\main.cpp(20,11): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
   Generating Code...

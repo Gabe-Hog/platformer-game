@@ -8,7 +8,7 @@
 class Character;
 
 
-class Weapon : public GameObjects
+class Weapon : sf::Drawable
 {
 private:
 
@@ -35,9 +35,10 @@ public:
 	bool hit() const;
 
 	sf::Vector2f getOwnerPosition() const;
+
 	virtual void checkCollision(GameObjects& object) = 0;
 	virtual void updatePosition(float dTime) = 0;
-	
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
 	
 	virtual void attack(sf::Vector2f targetDirection = { 0.f,0.f }) = 0;
 

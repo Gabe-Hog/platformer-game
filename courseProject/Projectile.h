@@ -16,20 +16,18 @@ private:
 	vector<shared_ptr<Projectile>> projectiles;
 	bool outOfBounds() const;
 
+
 public:
 	Projectile() = default;
 	Projectile(int damage, float speed);
 	Projectile(float speed, sf::Vector2f ownerPosition, sf::Vector2f targetPosition);
-	Projectile(const Projectile& other);
 	~Projectile() = default;
-	void attack(sf::Vector2f targetPosition) override;
+	
+
 	void updatePosition(float dTime) override;
 	void checkCollision(GameObjects& object) override;
-	
-
-
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-	
+	void attack(sf::Vector2f targetPosition) override;
 	
 	vector<shared_ptr<Projectile>> getProjectiles() const;
 

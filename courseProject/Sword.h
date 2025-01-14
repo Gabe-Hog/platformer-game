@@ -13,15 +13,19 @@ private:
 	sf::Sprite swordSprite;
 	sf::Texture swordTexture;
 
+	
+
 public:
 
 	Sword() = default;
 	Sword(sf::Texture texture);
 	~Sword() = default;
-	void attack(sf::Vector2f targetDirection) override;
+	
 	void updatePosition(float dTime) override;
 	void checkCollision(GameObjects& object1) override;
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+	void attack(sf::Vector2f targetDirection) override;
+
 };
 #endif
