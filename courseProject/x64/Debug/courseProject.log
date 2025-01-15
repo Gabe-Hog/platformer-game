@@ -1,23 +1,24 @@
 ﻿  Character.cpp
   Enemy.cpp
-C:\Users\gabri\source\repos\courseProject\courseProject\Enemy.cpp(88,34): warning C4244: '=': conversion from 'int' to 'T', possible loss of data
-C:\Users\gabri\source\repos\courseProject\courseProject\Enemy.cpp(88,34): warning C4244:         with
-C:\Users\gabri\source\repos\courseProject\courseProject\Enemy.cpp(88,34): warning C4244:         [
-C:\Users\gabri\source\repos\courseProject\courseProject\Enemy.cpp(88,34): warning C4244:             T=float
-C:\Users\gabri\source\repos\courseProject\courseProject\Enemy.cpp(88,34): warning C4244:         ]
-C:\Users\gabri\source\repos\courseProject\courseProject\Enemy.cpp(89,34): warning C4244: '=': conversion from 'int' to 'T', possible loss of data
-C:\Users\gabri\source\repos\courseProject\courseProject\Enemy.cpp(89,34): warning C4244:         with
-C:\Users\gabri\source\repos\courseProject\courseProject\Enemy.cpp(89,34): warning C4244:         [
-C:\Users\gabri\source\repos\courseProject\courseProject\Enemy.cpp(89,34): warning C4244:             T=float
-C:\Users\gabri\source\repos\courseProject\courseProject\Enemy.cpp(89,34): warning C4244:         ]
+C:\Users\gabri\source\repos\platformer-game\courseProject\Enemy.cpp(79,34): warning C4244: '=': conversion from 'int' to 'T', possible loss of data
+C:\Users\gabri\source\repos\platformer-game\courseProject\Enemy.cpp(79,34): warning C4244:         with
+C:\Users\gabri\source\repos\platformer-game\courseProject\Enemy.cpp(79,34): warning C4244:         [
+C:\Users\gabri\source\repos\platformer-game\courseProject\Enemy.cpp(79,34): warning C4244:             T=float
+C:\Users\gabri\source\repos\platformer-game\courseProject\Enemy.cpp(79,34): warning C4244:         ]
+C:\Users\gabri\source\repos\platformer-game\courseProject\Enemy.cpp(80,34): warning C4244: '=': conversion from 'int' to 'T', possible loss of data
+C:\Users\gabri\source\repos\platformer-game\courseProject\Enemy.cpp(80,34): warning C4244:         with
+C:\Users\gabri\source\repos\platformer-game\courseProject\Enemy.cpp(80,34): warning C4244:         [
+C:\Users\gabri\source\repos\platformer-game\courseProject\Enemy.cpp(80,34): warning C4244:             T=float
+C:\Users\gabri\source\repos\platformer-game\courseProject\Enemy.cpp(80,34): warning C4244:         ]
   Game.cpp
-C:\Users\gabri\source\repos\courseProject\courseProject\Game.cpp(11,44): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-C:\Users\gabri\source\repos\courseProject\courseProject\Game.cpp(11,37): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\gabri\source\repos\platformer-game\courseProject\Game.cpp(11,44): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\gabri\source\repos\platformer-game\courseProject\Game.cpp(11,37): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
   Platform.cpp
   Player.cpp
   Projectile.cpp
   Sword.cpp
+  Weapon.cpp
   main.cpp
-C:\Users\gabri\source\repos\courseProject\courseProject\main.cpp(20,11): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
+C:\Users\gabri\source\repos\platformer-game\courseProject\main.cpp(20,11): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
   Generating Code...
-  courseProject.vcxproj -> C:\Users\gabri\source\repos\courseProject\x64\Debug\courseProject.exe
+  courseProject.vcxproj -> C:\Users\gabri\Source\Repos\platformer-game\x64\Debug\courseProject.exe
