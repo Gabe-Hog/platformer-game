@@ -39,6 +39,7 @@ private:
 	void endRound(const Player&);
 	void writeScoreToFile(string score);
 	void updatePlayersScore(const Player& player);
+
 public:
 	
 	Game();

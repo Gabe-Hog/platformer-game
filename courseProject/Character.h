@@ -61,10 +61,6 @@ public:
 
 	void takeDamage(int damage);
 
-	
-
-
-
 	float getMoveSpeed() const;
 	int getHealth() const;
 	sf::Text getText() const;

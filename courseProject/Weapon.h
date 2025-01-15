@@ -18,11 +18,12 @@ private:
 	sf::Vector2f ownerPosition;
 	 
 protected:
+
 	float getSpeed() const;
 	int getDamage() const;
 	void dealDamage(Character& character) const;
-	
 	void setDidHit(bool hit);
+
 public:
 
 	Weapon() = default;
@@ -31,9 +32,10 @@ public:
 	virtual ~Weapon() = default;
 	
 	
-	void setOwnerPosition(sf::Vector2f newOwnerPosition);
+	
 	bool hit() const;
 
+	void setOwnerPosition(sf::Vector2f newOwnerPosition);
 	sf::Vector2f getOwnerPosition() const;
 
 	virtual void checkCollision(GameObjects& object) = 0;

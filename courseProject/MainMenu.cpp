@@ -196,7 +196,7 @@ bool MainMenu::sortScoreBoard(const string& toCompareOne, const string& toCompar
 
 vector<string> MainMenu::readScoreBoard()
 {
-	bool didRead = false;
+
 	string line;
 	vector<string> lines;
 	ifstream inPut("scoreBoard.txt");

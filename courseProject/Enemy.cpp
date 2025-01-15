@@ -57,15 +57,6 @@ void Enemy::checkForDeath()
     }
 }
 
-
-
-
-
-void Enemy::setAttackSpeed(float newAttackSpeed)
-{
-    this->attackSpeed = newAttackSpeed;
-}
-
 inline void Enemy::makeAttackCheck(float &timeInterval, sf:: Vector2f targetPosition)
 {
     if (timeInterval > this->attackSpeed)
@@ -128,3 +119,7 @@ void Enemy::updateDifficulty()
     }
 }
 
+void Enemy::setAttackSpeed(float newAttackSpeed)
+{
+    this->attackSpeed = newAttackSpeed;
+}
