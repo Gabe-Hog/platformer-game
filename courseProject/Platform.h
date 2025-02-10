@@ -12,8 +12,7 @@ private:
 
 public:
 	Platform() = default;
-	Platform(sf::Vector2f pos, float width, float height);
-	Platform(sf::Vector2f pos, sf::Color colour, float width, float height);
+	Platform(sf::Vector2f pos, float width, float height, sf::Color colour = sf::Color(141, 128, 128));
 	~Platform()=default;
 
 	sf::FloatRect getBounds() const;

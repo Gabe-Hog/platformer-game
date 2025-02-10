@@ -1,22 +1,24 @@
 #include "Enemy.h"
 #include <cstdlib>
 #include <ctime>
-#include <math.h>
 #include <utility>
 #include "Game.h"
 
-
+static sf::Vector2f ENEMY_SPAWN_POSITION = { WIDTH-50.f, HEIGHT - 50.f };
 
 Enemy::Enemy(const Player& player, Game* gameInstance, void(Game::*onDeathCallBack)(const Player&), assetHandler<sf::Font>* fontHandler, assetHandler<sf::Texture>* textureHandler) :
-    Character(new Projectile(1, 200), 20, "Ross", 200.f, gameInstance, onDeathCallBack, fontHandler, textureHandler), target(player)
+    Character(new Projectile(), 20, "Ross", 200.f, gameInstance, onDeathCallBack, fontHandler, textureHandler), target(player)
 {
+    const sf::Vector2f ENEMY_NAME_TEXT_POS = { WIDTH - this->getText().getLocalBounds().width, 0.f };
+
     this->setCharacterTexture("enemyOven");
     this->setTextureToSprite();
-    this->setSpritePosition({ 850, 550 });
     this->setSpriteOrigin();
+    this->setSpritePosition(ENEMY_SPAWN_POSITION);
+ 
     
-    this->randomPosition = { 850, 550 };
-    this->setNameTextPosition({ WIDTH - 100.f, 0.f });
+    this->randomPosition = ENEMY_SPAWN_POSITION;
+    this->setNameTextPosition(ENEMY_NAME_TEXT_POS);
 }
 
 
@@ -53,7 +55,7 @@ void Enemy::checkForDeath()
     {
         this->invokeOnDeath(this->target);
         this->updateDifficulty();
-        this->setSpritePosition({ 850, 550 });
+        this->setSpritePosition(ENEMY_SPAWN_POSITION);
     }
 }
 
@@ -94,7 +96,7 @@ void Enemy::updatePosition(float dTime)
     this->getWeapon()->setOwnerPosition(this->getSpritePosition());
     
     sf::Vector2f targetPosition = this->target.getSpritePosition();
-    static float timeAccumulator = 0.0f;
+    static float timeAccumulator = 0.f;
     timeAccumulator += dTime;
 
     this->makeAttackCheck(timeAccumulator, targetPosition);

@@ -1,7 +1,5 @@
 #ifndef WEAPON_H
 #define WEAPON_H
-
-
 #include "GameObjects.h"
 
 
@@ -13,7 +11,7 @@ class Weapon : sf::Drawable
 private:
 
 	int damage = 1;
-	float speed;
+	float speed = 200;
 	bool didHit = false;
 	sf::Vector2f ownerPosition;
 	 

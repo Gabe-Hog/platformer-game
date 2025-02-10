@@ -13,8 +13,8 @@
 
 using namespace std;
 
-static float WIDTH = 900;
-static float HEIGHT = 600;
+static const float WIDTH = 900;
+static const float HEIGHT = 600;
 
 class Game
 {
@@ -46,14 +46,6 @@ public:
 	~Game();
 	void run();
 	bool addObject(GameObjects* aObject);
-	
-
-	
-	
-
-	
-
-
 
 };
 

@@ -9,7 +9,7 @@
 using namespace std;
 
 /// <summary>
-/// Class object needs to have function loadFromFile().
+/// DataType needs to have function loadFromFile().
 /// </summary>
 /// <typeparam name="T"></typeparam>
 template<typename T> 

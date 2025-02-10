@@ -14,6 +14,7 @@ class MainMenu
 {
 
 private:
+
 	sf::RenderWindow& window;
 	sf::Sprite mainMenuBackground;
 	sf::Texture mainMenuBackgroundTexture;
@@ -24,7 +25,6 @@ private:
 	assetHandler<sf::Font>* fontHandler;
 	assetHandler<sf::Texture>* textureHandler;
 	vector<unique_ptr<Button>> menuButtons;
-	
 
 
 	
@@ -46,15 +46,12 @@ private:
 	vector<string> formatScore(vector<string> scoreBoard);
 	static bool sortScoreBoard(const string& toComapreOne, const string& toComapreTwo);
 
-	
-	
-
 
 public:
 
 	MainMenu() = default;
 	MainMenu(sf::RenderWindow& window, assetHandler<sf::Font>* fontHandler, assetHandler<sf::Texture>* textureHandler, string infoText = "-The Revenge Of The Chick-");
-	~MainMenu();
+	~MainMenu() = default;
 	
 	bool runMenu();
 

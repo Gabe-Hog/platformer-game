@@ -10,7 +10,8 @@
 
 Game::Game() : window(sf::VideoMode(WIDTH, HEIGHT), "Revenge Of The Chick")
 {
-	window.setFramerateLimit(60);
+	const int FRAMERATE_LIMIT = 60;
+	window.setFramerateLimit(FRAMERATE_LIMIT);
 	
 	try
 	{
@@ -118,7 +119,7 @@ void Game::initGameObjects()
 	this->addObject(new Platform(sf::Vector2f(400, 400), 100.f, 20.f));
 	this->addObject(new Platform(sf::Vector2f(150, 250), 150.f, 20.f));
 	this->addObject(new Platform(sf::Vector2f(450, 170), 70.f, 20.f));
-	this->addObject(new Platform(sf::Vector2f(0, HEIGHT - 1.f), sf::Color::Transparent, WIDTH, 1.f));
+	this->addObject(new Platform(sf::Vector2f(0, HEIGHT - 1.f), WIDTH, 1.f, sf::Color::Transparent));
 
 }
 
@@ -193,7 +194,6 @@ void Game::updatePlayersScore(const Player& player)
 	Player& notConstPlayer = const_cast<Player&>(player);
 	notConstPlayer.updateScore();
 
-
 }
 
 
@@ -228,8 +228,3 @@ void Game::writeScoreToFile(string score)
 	outPut << score << endl;;
 	outPut.close();
 }
-
-
-
-
-

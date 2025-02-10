@@ -12,16 +12,11 @@ private:
 protected:
 
 	DirectionVectorProcessor() = default;
-	DirectionVectorProcessor(DirectionVectorProcessor&) = default;
 	~DirectionVectorProcessor() = default;
 	void setDirection(sf::Vector2f newDirection);
 	sf::Vector2f getNormalizedDirection();
-	
-
-
 
 };
 
 
 #endif
-

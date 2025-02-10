@@ -5,14 +5,15 @@
 #include "GameObjects.h"
 #include "assetHandler.h"
 
-class Player;
+
 
 using namespace std;
 
 class Game;
+class Player;
 class Weapon;
 
-class Character:public GameObjects
+class Character : public GameObjects
 
 {
 private:

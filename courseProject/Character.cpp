@@ -1,27 +1,20 @@
 #include "Character.h"
 #include "Weapon.h"
 #include "assetHandler.h"
-#include <iostream>
 #include "Enemy.h"
-
-
-
+#include <iostream>
 
 Character::Character(Weapon* weapon, int newHealth, string newName, float newMoveSpeed, Game* gameInstance, void (Game::* onDeathCallBack)(const Player&), assetHandler<sf::Font>* fontHandler, assetHandler<sf::Texture>* textureHandler) :
 	weapon(weapon), health(newHealth), name(newName), moveSpeed(newMoveSpeed), gameInstance(gameInstance), onDeathCallBack(onDeathCallBack), fontHandler(fontHandler), textureHandler(textureHandler)
 {
-	
-	this->characterText.setCharacterSize(18);
+	const int CHARACTER_SIZE = 18;
+
+	this->characterText.setCharacterSize(CHARACTER_SIZE);
 	this->characterText.setFillColor(sf::Color::White);
 	this->characterText.setString(this->characterDataToString());
-	sf::FloatRect textBounds = this->characterText.getGlobalBounds();
-	this->characterText.setOrigin(textBounds.left, textBounds.top + textBounds.height);
+	
 	this->characterText.setFont(this->nameFont);
 }
-
-
-
-
 
 
 Character::~Character()
@@ -101,21 +94,20 @@ string Character::getName() const
 	return this->name;
 }
 
+sf::Text Character::getText() const
+{
+	return this->characterText;
+}
 string Character::characterDataToString() const
 {
 	return this->name + ": " + to_string(this->health) + " HP";
 }
 
+
 void Character::setNameTextPosition(sf::Vector2f pos)
 {
 	this->characterText.setPosition(pos);
 }
-
-sf::Text Character::getText() const
-{
-	return this->characterText;
-}
-
 
 
 void Character::setHealth(int newHealth)
@@ -158,4 +150,3 @@ sf::Texture& Character::getTexture()
 {
 	return this->characterTexture;
 }
-

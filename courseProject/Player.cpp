@@ -8,13 +8,17 @@
 Player::Player(Game* gameInstance, void(Game::* onDeathCallBack)(const Player&), assetHandler<sf::Font>* fontHandler, assetHandler<sf::Texture>* textureHandler):
 	Character(new Sword(textureHandler->getAsset("sword")), 5, "Bob", 200.f, gameInstance, onDeathCallBack, fontHandler, textureHandler)
 {
+	const sf::Vector2f TEXT_POSITION = { 0.f, 0.f };
+	const sf::Vector2f Start_POSITION = { 25.f, 525.f };
+	const sf::Vector2f SPRITE_SCALE = { 0.019f, 0.02f };
+
 	this->setCharacterTexture("chick");
 	this->setTextureToSprite();
-	this->setSpriteScale({ 0.019f, 0.02f });
-	this->setSpritePosition({ 25, 525 });
+	this->setSpriteScale(SPRITE_SCALE);
+	this->setSpritePosition(Start_POSITION);
 	this->setSpriteOrigin();
 
-	this->setNameTextPosition({ 0.f, 0.f });
+	this->setNameTextPosition(TEXT_POSITION);
 }
 
 Player::~Player()
@@ -23,10 +27,10 @@ Player::~Player()
 }
 
 
-inline void Player::movePlayer(float dTime)
+void Player::movePlayer(float dTime)
 {
 	this->velocity.x = 0.f;
-
+	
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
@@ -35,9 +39,7 @@ inline void Player::movePlayer(float dTime)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
-
 		this->velocity.x -= this->getMoveSpeed();
-
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
@@ -50,28 +52,23 @@ inline void Player::movePlayer(float dTime)
 	{
 		this->isJumping = true;
 		velocity.y = -sqrtf(2.0f * 981.f * this->jumpHeight);
-
-
 	}
 	this->decreaseVelocityY(dTime);
 	this->moveCharacterSprite(velocity * dTime);
 }
 
-inline void Player::decreaseVelocityY(float dTime)
+void Player::decreaseVelocityY(float dTime)
 {
-	this->velocity.y += 981.f * dTime;
+	static const float GRAVITY = 981.f;
+	this->velocity.y += GRAVITY * dTime;
 }
 
 
 void Player::updatePosition(float dTime)
 {
-
 	this->getWeapon()->setOwnerPosition(this->getSpritePosition());
 	this->movePlayer(dTime);
 	this->getWeapon()->updatePosition(dTime);
-	
-
-
 }
 
 void Player::checkCollision(GameObjects& object)
@@ -87,13 +84,13 @@ void Player::checkCollision(GameObjects& object)
 
 	if (playerPosition.x + playerBounds.width/2 > WIDTH)
 	{
-		this->setSpritePosition({ WIDTH - playerBounds.width / 2, playerPosition.y });
+		this->setSpritePosition({ WIDTH - playerBounds.width / 2.f, playerPosition.y });
 	}
 
-	if (playerPosition.y + playerBounds.height/2 > HEIGHT)
+	if (playerPosition.y + playerBounds.height/2.f > HEIGHT)
 	{
 		
-		this->setSpritePosition({ playerPosition.x, HEIGHT - playerBounds.height / 2 });
+		this->setSpritePosition({ playerPosition.x, HEIGHT - playerBounds.height / 2.f });
 		
 	}
 
@@ -106,12 +103,8 @@ void Player::checkCollision(GameObjects& object)
 	}
 
 	this->getWeapon()->checkCollision(object);
-	
-
-
-
-
 }
+
 
 void Player::setJumping(bool state)
 {
@@ -122,8 +115,6 @@ void Player::setVelocity(sf::Vector2f newVel)
 {
 	this->velocity = newVel;
 }
-
-
 
 int Player::getScore() const
 {
@@ -155,9 +146,4 @@ void Player::checkForDeath()
 	{
 		this->invokeOnDeath(*this);
 	}
-
-
-
 }
-
-
