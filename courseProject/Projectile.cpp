@@ -121,4 +121,3 @@ vector<shared_ptr<Projectile>> Projectile::getProjectiles() const
 {
     return this->projectiles;
 }
-

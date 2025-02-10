@@ -49,4 +49,3 @@ bool Weapon::hit() const
 {
 	return this->didHit;
 }
-

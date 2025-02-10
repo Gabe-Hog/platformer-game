@@ -11,11 +11,12 @@ private:
 
 	 int unsigned score = 0;
 	 sf::Vector2f velocity;
-	 float jumpHeight = 150.f;
+	
+	 const float jumpHeight = 150.f; 
 	 bool isJumping = false;
 
-	 inline void movePlayer(float dTime);
-	 inline void decreaseVelocityY(float dTime);
+	 void movePlayer(float dTime);
+	 void decreaseVelocityY(float dTime);
 
 	
 	 
@@ -40,8 +41,6 @@ public:
 	void updatePosition(float dTime) override;
 	void checkCollision(GameObjects & object1) override;
 	
-
-
 
 };
 

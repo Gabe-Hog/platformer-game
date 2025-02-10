@@ -6,10 +6,11 @@
 Button::Button(bool (MainMenu::*onPressCallBack)(), MainMenu& menu, sf::Font& font, sf::Vector2f position, string buttonText)
 	: onPressCallBack(onPressCallBack), menu(menu)
 {
+	const unsigned int BUTTON_TEXT_SIZE = 18;
 
 	this->buttonText.setFont(font);
 	this->buttonText.setPosition(position);
-	this->buttonText.setCharacterSize(18);
+	this->buttonText.setCharacterSize(BUTTON_TEXT_SIZE);
 	this->buttonText.setString(buttonText);
 	
 	this->buttonText.setFillColor(sf::Color::White);
@@ -44,8 +45,4 @@ void Button::checkForButtonPress(sf::Vector2f& mouseCursor, sf::Event& e)
 void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(buttonText);
-}
-
-Button::~Button()
-{
 }

@@ -19,8 +19,6 @@ int main()
 
 	int srand(time(0));
 	game.run();
-	
-	
 
 	return 0;
 }

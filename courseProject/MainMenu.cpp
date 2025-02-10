@@ -19,11 +19,6 @@ MainMenu::MainMenu(sf::RenderWindow& window, assetHandler<sf::Font>* fontHandler
 	this->initButtons();
 }
 
-MainMenu::~MainMenu()
-{
-
-}
-
 void MainMenu::displayMenu()
 {
 	this->window.clear();
@@ -55,12 +50,15 @@ void MainMenu::initBackground()
 
 void MainMenu::initText()
 {
-	this->text.setCharacterSize(30);
+	const unsigned int NORMAL_TEXT_SIZE = 30;
+	const unsigned int SCORE_TEXT_SIZE = 20;
+
+	this->text.setCharacterSize(NORMAL_TEXT_SIZE);
 	this->text.setFillColor(sf::Color::White);
 	this->text.setFont(textFont);
 	this->text.setPosition(this->window.getSize().x / 5.f, this->window.getSize().y / 3.f);
 
-	this->scoreBoardText.setCharacterSize(20);
+	this->scoreBoardText.setCharacterSize(SCORE_TEXT_SIZE);
 	this->scoreBoardText.setFont(this->textFont);
 	this->scoreBoardText.setLetterSpacing(2);
 	this->scoreBoardText.setPosition(this->window.getSize().x / 2.5f, this->window.getSize().y / 2.5f);
@@ -100,12 +98,13 @@ bool MainMenu::runMenu()
 
 void MainMenu::initButtons() 
 {
+
 	this->menuButtons.push_back(make_unique<Button>(&MainMenu::returnPlayTrue, *this, this->textFont,
 		sf::Vector2f(this->window.getSize().x / 5.f, this->window.getSize().y / 2.5f), "Play Game"));
 	this->menuButtons.push_back(make_unique<Button>(&MainMenu::manageScoreBoard, *this, this->textFont,
-		sf::Vector2f(this->window.getSize().x / 5.f, this->window.getSize().y / 2.5f+ 30.f), "Show ScoreBoard"));
+		sf::Vector2f(this->window.getSize().x / 5.f, this->window.getSize().y / 2.5f + 30.f), "Show ScoreBoard"));
 	this->menuButtons.push_back(make_unique<Button>(&MainMenu::closeProgram, *this, this->textFont,
-		sf::Vector2f(this->window.getSize().x / 5.f, this->window.getSize().y / 2.5f+ 60.f), "Exit"));
+		sf::Vector2f(this->window.getSize().x / 5.f, this->window.getSize().y / 2.5f + 60.f), "Exit"));
 }
 
 void MainMenu::setPlay(bool newPlay)
@@ -213,5 +212,3 @@ vector<string> MainMenu::readScoreBoard()
 	return lines;
 
 }
-
-

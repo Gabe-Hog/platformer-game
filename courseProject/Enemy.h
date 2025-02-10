@@ -16,14 +16,12 @@ private:
 	float attackSpeed = 2.0f;
 	sf::Vector2f randomPosition;
 	const Player& target;
-	
 
 	
 	void updateDifficulty();
 	inline void makeAttackCheck(float &timeInterval, sf::Vector2f targetPosition);
 	inline void moveEnemy(float dTime, float &timeInterval);
 	
-
 
 
 public:
@@ -37,8 +35,6 @@ public:
 	void checkForDeath() override;
 	void updatePosition(float dTime) override;
 	void checkCollision(GameObjects& object1) override;
-
-
 
 
 };
