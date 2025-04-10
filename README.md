@@ -1,7 +1,6 @@
 
 
-A small 2D platformer game, that was developed using C++ and the game library SFML. This project was created as a final assignment in the course "Object Oriented Programming with C++" from the university "Blekinge Institue Of Technology", therefore there were some limiting factors. Hopefully I will be able to expand it and make it into a proper boss rush game.
-
+A small 2D platformer game, that was developed using C++ and the game library SFML. 
 <img src="https://github.com/user-attachments/assets/4284f896-2aca-48ed-b34c-d08cfc1e1c1f" alt="RevengeOfChick" width="600">
 
 
